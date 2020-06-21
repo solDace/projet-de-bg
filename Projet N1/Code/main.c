@@ -201,10 +201,7 @@ void gestionEvenement(EvenementGfx evenement)
 
 						break;
 					case 21:
-
-						break;
-					case 22:
-	check = Check_Circle(circle);
+check = Check_Circle(circle);
 
 
 					if(partie==0){
@@ -231,6 +228,9 @@ void gestionEvenement(EvenementGfx evenement)
 
 						}
 					}
+						break;
+					case 22:
+	
 						break;
 					case 23:
 
