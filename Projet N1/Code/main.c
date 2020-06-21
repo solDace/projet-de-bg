@@ -78,7 +78,7 @@ void gestionEvenement(EvenementGfx evenement)
 			switch (page) {
 				case 0:
 
-					break
+					break;
 				case 1:
 
 					break;
@@ -166,7 +166,7 @@ void gestionEvenement(EvenementGfx evenement)
 				switch (page) {
 					case 0:
 
-						break
+						break;
 					case 1:
 
 						break;
