@@ -54,7 +54,7 @@ des qu'une evenement survient */
 void gestionEvenement(EvenementGfx evenement)
 {
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
-	static DonneesImageRGB *image = NULL; // L'image a afficher au centre de l'ecran
+	static DonneesImageRGB *image = NULL; // L'image a afficher au centre de l'écran
 
 
 
@@ -101,7 +101,7 @@ void gestionEvenement(EvenementGfx evenement)
 					
 					break;
 				case 2:
-
+					menuFlex();
 					break;
 				case 4:
 					PageResultat();
@@ -245,7 +245,7 @@ void gestionEvenement(EvenementGfx evenement)
 
 						break;
 					case 2:
-
+						page = checkFlex();
 						break;
 					case 21:
 						check = Check_Circle(circle);
