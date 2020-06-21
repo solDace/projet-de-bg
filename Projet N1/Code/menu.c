@@ -121,3 +121,14 @@ int checkFlex() {
 	}
 	return active;
 }
+
+
+int CheckLeave() {
+	int active = 4;
+	//Bouton quitter
+	if(abscisseSouris() >= 0 && abscisseSouris() <= 50 && ordonneeSouris() >= HauteurFenetre-30 && ordonneeSouris() <= HauteurFenetre) {
+		active = 0;
+		printf("Retour Menu principal\n");
+	}
+	return active;
+}
