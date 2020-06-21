@@ -1,7 +1,7 @@
 #include "main.h"
 
 void traceMenu() {
-	float taille1, taille2, taille3;
+	float taille2, taille3;
 	//triangle central
 	couleurCourante(213, 136, 120);
 	triangle(375, 400, 625, 400, 500, 200);
@@ -18,9 +18,8 @@ void traceMenu() {
 	//rectangle d'affichage du texte
 	rectangle(300, 800, 700, 750);
 	//titre
-	couleurCourante(0, 0, 0);
-	taille1 = tailleChaine("Test Checker", 32);
-	afficheChaine("Test Checker", 32, (LargeurFenetre - taille1)/2, 762);
+	Display_TestTop();
+	Display_TestName("Test Checker");
 	//titre triangle haut
 	couleurCourante(0, 0, 0);
 	taille2 = tailleChaine("Memoire", 24);
@@ -65,6 +64,7 @@ int checkMenu() {
 	}
 	return active;
 }
+
 void menuFlex() {
 	float taille;
 	//bandeau
@@ -129,6 +129,120 @@ int CheckLeave() {
 	if(abscisseSouris() >= 0 && abscisseSouris() <= 50 && ordonneeSouris() >= HauteurFenetre-30 && ordonneeSouris() <= HauteurFenetre) {
 		active = 0;
 		printf("Retour Menu principal\n");
+	}
+	return active;
+}
+
+void menuMem() {
+	float taille;
+	//bandeau
+	Display_TestTop();
+	Display_TestName("Menu Memoire");
+	//triangle central
+	couleurCourante(213, 136, 120);
+	triangle(375, 500, 625, 500, 500, 300);
+	//triangle gauche
+	couleurCourante(175, 170, 169);
+	triangle(400, 200, 275, 400, 150, 200);
+	//triangle droite
+	couleurCourante(183, 248, 125);
+	triangle(600, 200, 725, 400, 850, 200);
+	//titre triangle central
+	couleurCourante(0, 0, 0);
+	taille = tailleChaine("Test 1", 24);
+	afficheChaine("Test 1", 24, (LargeurFenetre - taille)/2, 422);
+	//titre triangle gauche
+	couleurCourante(0, 0, 0);
+	afficheChaine("Test 2", 24, 232, 262);
+	//titre triangle droite
+	couleurCourante(0, 0, 0);
+	afficheChaine("Test 3", 24, 682, 262);
+	//bouton retour
+	couleurCourante(210, 210, 210);
+	rectangle(0, 710, 50, 680);
+	couleurCourante(175, 170, 169);
+	triangle(2, 695, 12, 708, 12, 682);
+	rectangle(10, 702, 48, 688);
+}
+
+int checkMem() {
+	int active = 0;
+	//triangle central
+	if(abscisseSouris() >= 375 && abscisseSouris() <= 625 && ordonneeSouris() <= 500 && ordonneeSouris() >= 300) {
+		active = 21;
+		printf("Vers Test 1\n");
+	}
+	//triangle gauche
+	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 570 && abscisseSouris() <= 750) {
+		active = 2;
+		printf("Vers Test 2\n");
+	}
+	//triangle droite
+	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 250 && abscisseSouris() <= 430) {
+		active = 3;
+		printf("Vers Test 3\n");
+	}
+	//bouton retour
+	if(abscisseSouris() <= 50 && abscisseSouris() >= 0 && ordonneeSouris() <= 710 && ordonneeSouris() >= 680){
+		active = 0;
+		printf("Vers Menu");
+	}
+	return active;
+}
+
+void menuSync() {
+	float taille;
+	//bandeau
+	Display_TestTop();
+	Display_TestName("Menu Synchronisation");
+	//triangle central
+	couleurCourante(213, 136, 120);
+	triangle(375, 500, 625, 500, 500, 300);
+	//triangle gauche
+	couleurCourante(175, 170, 169);
+	triangle(400, 200, 275, 400, 150, 200);
+	//triangle droite
+	couleurCourante(183, 248, 125);
+	triangle(600, 200, 725, 400, 850, 200);
+	//titre triangle central
+	couleurCourante(0, 0, 0);
+	taille = tailleChaine("Test 1", 24);
+	afficheChaine("Test 1", 24, (LargeurFenetre - taille)/2, 422);
+	//titre triangle gauche
+	couleurCourante(0, 0, 0);
+	afficheChaine("Test 2", 24, 232, 262);
+	//titre triangle droite
+	couleurCourante(0, 0, 0);
+	afficheChaine("Test 3", 24, 682, 262);
+	//bouton retour
+	couleurCourante(210, 210, 210);
+	rectangle(0, 710, 50, 680);
+	couleurCourante(175, 170, 169);
+	triangle(2, 695, 12, 708, 12, 682);
+	rectangle(10, 702, 48, 688);
+}
+
+int checkSync() {
+	int active = 0;
+	//triangle central
+	if(abscisseSouris() >= 375 && abscisseSouris() <= 625 && ordonneeSouris() <= 500 && ordonneeSouris() >= 300) {
+		active = 21;
+		printf("Vers Test 1\n");
+	}
+	//triangle gauche
+	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 570 && abscisseSouris() <= 750) {
+		active = 2;
+		printf("Vers Test 2\n");
+	}
+	//triangle droite
+	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 250 && abscisseSouris() <= 430) {
+		active = 3;
+		printf("Vers Test 3\n");
+	}
+	//bouton retour
+	if(abscisseSouris() <= 50 && abscisseSouris() >= 0 && ordonneeSouris() <= 710 && ordonneeSouris() >= 680){
+		active = 0;
+		printf("Vers Menu");
 	}
 	return active;
 }
