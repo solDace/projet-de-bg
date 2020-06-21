@@ -77,7 +77,6 @@ void gestionEvenement(EvenementGfx evenement)
 
 			// On part d'un fond d'ecran blanc
 			effaceFenetre (255, 255, 255);
-			//~ PageResultat();
 
 			switch (page) {
 				case 0:
