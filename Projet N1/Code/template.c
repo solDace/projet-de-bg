@@ -201,7 +201,7 @@ int SaveScore(int score, char pName[MAX_NAME],char files[MAX_NAME]){
 		fseek(fil, 0, SEEK_END);
 		fprintf(fil, "%s \t \t %d \n",pName,score);
 
-		
+
 		fclose(fil);
 		return 1;
 	}
@@ -212,63 +212,62 @@ int ReadScore(int score[MAX_PLAYERS], char pName[MAX_NAME],char files[MAX_NAME])
 	FILE *fil=NULL;
 	fil=fopen(files,"rb");
 	memset(score,0,MAX_PLAYERS);
-	
+
 	char name[MAX_NAME]="";
-	
+
 	int i=0;
 	int sc=0;
-	
+
 	if (!fil)
 		return EXIT_FAILURE;
 	else{
 		rewind(fil);
- 
+
 
         while (fgetc(fil) != EOF){
 			fseek(fil,-1,SEEK_CUR);
 			fscanf(fil, "%s", name);
 			fseek(fil,5,SEEK_CUR);
 			fscanf(fil, "%d \n", &sc);
-			
+
 			//~ strcat(name," \n");
-			
+
 			if(strcmp(name,pName)==0){
 				score[i]=sc;
 				i++;
 			}
 		}
-		
+
 		fclose(fil);
 		return i;
 	}
 }
 
 void PageResultat(char pName[MAX_NAME]){
-	
+
 	int D1=0,D2=0,D3=0,D4=0;
-	
+
 	D1=tailleChaine("Memoire",30);
 	D2=tailleChaine("Reflexes",30);
 	D3=tailleChaine("Synchronisation",30);
 	D4=tailleChaine("Resultats",30);
-	
+
 	couleurCourante(210,210,210);
 	rectangle(50,75,283,725);
 	rectangle(383,75,616,575);
 	rectangle(383,650,616,725);
 	rectangle(716,75,950,725);
 	rectangle(0,HauteurFenetre-30,50,HauteurFenetre);
-	
-	couleurCourante(0,0,0);
-	ligne(10,HauteurFenetre-15,30,HauteurFenetre-5);
-	ligne(10,HauteurFenetre-15,30,HauteurFenetre-25);
-	
+	couleurCourante(175, 170, 169);
+	triangle(2, 785, 12, 798, 12, 772);
+	rectangle(10, 792, 48, 778);
+
 	couleurCourante(0,0,0);
 	afficheChaine("Memoire",30,50+(233-D1)/2,680);
 	afficheChaine("Reflexes",30,383+(233-D2)/2,530);
 	afficheChaine("Resultats",30,383+(233-D4)/2,680);
 	afficheChaine("Synchronisation",30,716+(233-D3)/2,680);
-	
+
 	resTest1(pName);
 	resTest2(pName);
 	resTest3(pName);
@@ -276,70 +275,70 @@ void PageResultat(char pName[MAX_NAME]){
 	resTest5(pName);
 	resTest6(pName);
 
-	
+
 }
 
 void resTest1(char pName[MAX_NAME]){
-	
+
 	couleurCourante(170,170,170);
 	rectangle(75,400,258,650);
-	
+
 }
 
 void resTest2(char pName[MAX_NAME]){
-	
+
 	couleurCourante(170,170,170);
 	rectangle(75,100,258,350);
-	
+
 }
 
 void resTest3(char pName[MAX_NAME]){
-	
+
 	int D=tailleChaine("Boules",18), Tr=0, hs1=0, hs2=0, hs3=0;
 	int score[MAX_TRY];
 	char BS1[MAX_SCORE]="",BS2[MAX_SCORE]="",BS3[MAX_SCORE]="";
-	
+
 	couleurCourante(170,170,170);
 	rectangle(408,325,591,500);
-	
+
 	couleurCourante(0,0,0);
 	afficheChaine("Boules",18,408+(183-D)/2,475);
 	afficheChaine("1.",12,420,435);
 	afficheChaine("2.",12,420,395);
 	afficheChaine("3.",12,420,350);
-	
+
 	Tr=ReadScore(score,pName,"SaveTestBoule.txt");
 	hs1=HS1(score,Tr);
 	hs2=HS2(score,Tr,hs1);
 	hs3=HS3(score,Tr,hs1,hs2);
-	
+
 	sprintf(BS1,"%d",hs1);
 	sprintf(BS2,"%d",hs2);
 	sprintf(BS3,"%d",hs3);
-	
+
 	afficheChaine(BS1,12,440,435);
 	afficheChaine(BS2,12,440,395);
 	afficheChaine(BS3,12,440,350);
-	
-	
+
+
 }
 
 void resTest4(char pName[MAX_NAME]){
-	
+
 	couleurCourante(170,170,170);
 	rectangle(408,100,591,275);
-	
+
 }
 
 void resTest5(char pName[MAX_NAME]){
-	
+
 	couleurCourante(170,170,170);
 	rectangle(741,400,924,650);
 
 }
 
 void resTest6(char pName[MAX_NAME]){
-	
+
 	couleurCourante(170,170,170);
 	rectangle(741,100,924,350);
 
@@ -378,4 +377,3 @@ int HS3(int score[MAX_TRY],int nb,int hs1, int hs2){
 	}
 	return hs;
 }
-
