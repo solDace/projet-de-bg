@@ -24,8 +24,19 @@ int main(int argc, char **argv)
 	return 0;
 }
 
+/* variable désignant la page active
 
+0 = Menu principal
 
+1 = Menu Rémoire
+
+2 = Menu Réflex
+21 = Test cercle
+
+3 = Menu latéralité
+
+*/
+int page = 0;
 
 
 
@@ -63,10 +74,37 @@ void gestionEvenement(EvenementGfx evenement)
 
 			// On part d'un fond d'ecran blanc
 			effaceFenetre (255, 255, 255);
-			Display_TestTop();
-			Display_TestName("Memoire");
-			Display_TestScore(9);
 
+			switch (page) {
+				case 0:
+
+					break
+				case 1:
+
+					break;
+				case 2:
+
+					break;
+				case 21:
+
+					break;
+				case 22:
+
+					break;
+				case 23:
+
+					break;
+
+				case 31:
+
+					break;
+				case 32:
+
+					break;
+				case 33:
+
+					break;
+			}
 
 
 			break;
@@ -123,6 +161,38 @@ void gestionEvenement(EvenementGfx evenement)
 			{
 				printf("Bouton gauche appuye en : (%d, %d)\n", abscisseSouris(), ordonneeSouris());
 
+				//Switch pour les différentes fonctions check
+
+				switch (page) {
+					case 0:
+
+						break
+					case 1:
+
+						break;
+					case 2:
+
+						break;
+					case 21:
+
+						break;
+					case 22:
+
+						break;
+					case 23:
+
+						break;
+
+					case 31:
+
+						break;
+					case 32:
+
+						break;
+					case 33:
+
+						break;
+				}
 			}
 			else if (etatBoutonSouris() == GaucheRelache)
 			{
