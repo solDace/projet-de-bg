@@ -26,6 +26,8 @@
 #define MAX_TRY 200
 #define MAX_NAME 30
 #define MAX_PLAYERS 50
+#define MAX_SCORE 50
+
 
 typedef struct  coord{
 	int x;
@@ -36,6 +38,7 @@ void traceMenu();
 int checkMenu();
 void menuFlex();
 int checkFlex();
+int CheckLeave();
 
 void Display_TestTop();
 void Display_TestName(char* name);
@@ -56,14 +59,18 @@ int Check_TestQuitter();
 int Check_TestRejouer();
 
 
+
 void resTest1(char pName[MAX_NAME]);
 void resTest2(char pName[MAX_NAME]);
 void resTest3(char pName[MAX_NAME]);
 void resTest4(char pName[MAX_NAME]);
 void resTest5(char pName[MAX_NAME]);
 void resTest6(char pName[MAX_NAME]);
-void PageResultat();
+void PageResultat(char pName[MAX_NAME]);
 
 
 int ReadScore(int score[MAX_PLAYERS], char pName[MAX_NAME],char files[MAX_NAME]);
 int SaveScore(int score, char pName[MAX_NAME],char files[MAX_NAME]);
+int HS1(int score[MAX_TRY],int nb);
+int HS2(int score[MAX_TRY],int nb,int hs1);
+int HS3(int score[MAX_TRY],int nb,int hs1, int hs2);
