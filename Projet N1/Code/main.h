@@ -42,6 +42,8 @@ void Display_TestTime(time_t old, time_t new);
 void Display_TestBegin();
 coord Display_Circle (coord ancien);
 void Display_TestEnd(int score);
+void Display_MsgAccueil();
+void Display_MsgBienvenue(char *name);
 // Fonction de trace de cercle
 void cercle(float centreX, float centreY, float rayon);
 
