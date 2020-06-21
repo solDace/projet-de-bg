@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 3 = Menu Syncrhonisation
 4 = Menu Résultats
 */
-int page = 0;
+int page = -2;
 
 time_t time_debut = 0;
 time_t time_actuel= 0;
@@ -54,7 +54,7 @@ des qu'une evenement survient */
 void gestionEvenement(EvenementGfx evenement)
 {
 	static bool pleinEcran = false; // Pour savoir si on est en mode plein ecran ou pas
-	static DonneesImageRGB *image = NULL; // L'image a afficher au centre de l'écran
+	static DonneesImageRGB *image = NULL; // L'image a afficher au centre de l'ecran
 
 
 
@@ -85,14 +85,15 @@ void gestionEvenement(EvenementGfx evenement)
 			effaceFenetre (255, 255, 255);
 
 			switch (page) {
+				
 				case -2:
-				if(partie==0){
-					Display_MsgAccueil();
-				}
-				if(partie==1){
+						if(partie==0){
+							Display_MsgAccueil();
+						}
+						if(partie==1){
 
-					Display_MsgBienvenue(name);
-				}
+							Display_MsgBienvenue(name);
+						}
 				break;
 				case 0:
 					traceMenu();
@@ -104,7 +105,7 @@ void gestionEvenement(EvenementGfx evenement)
 					menuFlex();
 					break;
 				case 4:
-					PageResultat();
+					PageResultat(name);
 					break;
 				case 21:
 					Display_TestTop();
@@ -132,7 +133,7 @@ void gestionEvenement(EvenementGfx evenement)
 					else{
 						Display_TestEnd(score);
 						if(saving==0){
-						SaveScore(score,"JP","SaveTestBoule.txt");
+						SaveScore(score,name,"SaveTestBoule.txt");
 						saving=1;
 					}
 						
@@ -209,15 +210,17 @@ void gestionEvenement(EvenementGfx evenement)
                     page=2;
                     break;
 			}
+		}
 		else{
 			if(partie==0){
 				text = caractereClavier();
-				strncat(name, &text, 1);
 				if(caractereClavier()==13){
 					partie++;
 				}
+				else
+					strncat(name, &text, 1);
 			}
-
+			
 			else if(partie ==1){
 				page=0;
 				partie=0;
@@ -225,7 +228,6 @@ void gestionEvenement(EvenementGfx evenement)
 			}
 			}
 			break;
-
 		case ClavierSpecial:
 			printf("ASCII %d\n", toucheClavier());
 			break;
@@ -247,6 +249,8 @@ void gestionEvenement(EvenementGfx evenement)
 					case 2:
 						page = checkFlex();
 						break;
+					case 4:
+						page = CheckLeave();
 					case 21:
 						check = Check_Circle(circle);
 
