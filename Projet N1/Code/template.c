@@ -83,14 +83,6 @@ strcat(text, ScoreText);
 
 }
 
-/**
- * \fn void Display_TestScore(int score)
- * \brief Affichage du Score actuel
- *
- * \param score score ectuel
- * \return none
- */
-
 void Display_TestTime(time_t old, time_t new){
 
 int taille;
@@ -198,4 +190,134 @@ int Check_TestRejouer(){
     check=1;
   }
   return check;
+}
+
+int SaveScore(int score, char pName[MAX_NAME],char files[MAX_NAME]){
+	FILE *fil=NULL;
+	fil=fopen(files,"ab");
+	if (!fil)
+		return EXIT_FAILURE;
+	else{
+		fseek(fil, 0, SEEK_END);
+		fprintf(fil, "%s \t \t %d \n",pName,score);
+
+		
+		fclose(fil);
+		return 1;
+	}
+
+}
+
+int ReadScore(int score[MAX_PLAYERS], char pName[MAX_NAME],char files[MAX_NAME]){
+	FILE *fil=NULL;
+	fil=fopen(files,"rb");
+	memset(score,0,MAX_PLAYERS);
+	
+	char name[MAX_NAME]="";
+	char chaine[MAX_NAME] = "";
+	
+	int i=0, u=0;
+	int sc=0;
+	
+	if (!fil)
+		return EXIT_FAILURE;
+	else{
+		rewind(fil);
+ 
+
+        while (fgetc(fil) != EOF){
+			fseek(fil,-1,SEEK_CUR);
+			fscanf(fil, "%s", name);
+			fseek(fil,5,SEEK_CUR);
+			fscanf(fil, "%d \n", &sc);
+			
+			if(strcmp(name,pName)==0){
+				score[i]=sc;
+				i++;
+			}
+		}
+		
+		fclose(fil);
+		return i;
+	}
+}
+
+void PageResultat(){
+	
+	char pName[MAX_NAME];
+	int D1=0,D2=0,D3=0,D4=0;
+	
+	D1=tailleChaine("Memoire",30);
+	D2=tailleChaine("Reflex",30);
+	D3=tailleChaine("Synchronisation",30);
+	D4=tailleChaine("Resultats",30);
+	
+	couleurCourante(210,210,210);
+	rectangle(50,75,283,725);
+	rectangle(383,75,616,575);
+	rectangle(383,650,616,725);
+	rectangle(716,75,950,725);
+	
+	couleurCourante(0,0,0);
+	afficheChaine("Memoire",30,50+(233-D1)/2,680);
+	afficheChaine("Reflex",30,383+(233-D2)/2,530);
+	afficheChaine("Resultats",30,383+(233-D4)/2,680);
+	afficheChaine("Synchronisation",30,716+(233-D3)/2,680);
+	
+	resTest1(pName);
+	resTest2(pName);
+	resTest3(pName);
+	resTest4(pName);
+	resTest5(pName);
+	resTest6(pName);
+
+	
+}
+
+void resTest1(char pName[MAX_NAME]){
+	
+	couleurCourante(170,170,170);
+	rectangle(75,400,258,650);
+	
+}
+
+void resTest2(char pName[MAX_NAME]){
+	
+	couleurCourante(170,170,170);
+	rectangle(75,100,258,350);
+	
+}
+
+void resTest3(char pName[MAX_NAME]){
+	
+	int D=tailleChaine("Boules",18);
+	
+	couleurCourante(170,170,170);
+	rectangle(408,325,591,500);
+	
+	couleurCourante(0,0,0);
+	afficheChaine("Boules",18,408+(183-D)/2,475);
+	
+	
+}
+
+void resTest4(char pName[MAX_NAME]){
+	
+	couleurCourante(170,170,170);
+	rectangle(408,100,591,275);
+	
+}
+
+void resTest5(char pName[MAX_NAME]){
+	
+	couleurCourante(170,170,170);
+	rectangle(741,400,924,650);
+
+}
+
+void resTest6(char pName[MAX_NAME]){
+	
+	couleurCourante(170,170,170);
+	rectangle(741,100,924,350);
+
 }
