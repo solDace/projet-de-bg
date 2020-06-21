@@ -18,8 +18,12 @@
 
 
 // Largeur et hauteur par defaut d'une image correspondant a nos criteres
-#define LargeurFenetre 800
-#define HauteurFenetre 600
+#define LargeurFenetre 1000
+#define HauteurFenetre 800
+
+void traceMenu();
+int checkMenu();
+void menuMem();
 
 
 void Display_TestTop();
