@@ -39,6 +39,10 @@ int checkMenu();
 void menuFlex();
 int checkFlex();
 int CheckLeave();
+void menuMem();
+int checkMem();
+void menuSync();
+int checkSync();
 
 void Display_TestTop();
 void Display_TestName(char* name);
