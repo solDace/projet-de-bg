@@ -76,7 +76,7 @@ void gestionEvenement(EvenementGfx evenement)
 					traceMenu();
 					break;
 				case 1:
-					menuMem();
+					
 					break;
 				case 2:
 
