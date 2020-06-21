@@ -33,7 +33,7 @@ int main(int argc, char **argv)
 2 = Menu Réflex
 21 = Test cercle
 
-3 = Menu latéralité
+3 = Menu syncrhonisation
 
 */
 int page = 0;
