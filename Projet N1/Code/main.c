@@ -41,6 +41,7 @@ coord circle;
 int check = 0; // Check:  0=pas cliqué
 int score=-1;
 int partie=0;
+int saving=0;
 
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */
@@ -76,6 +77,7 @@ void gestionEvenement(EvenementGfx evenement)
 
 			// On part d'un fond d'ecran blanc
 			effaceFenetre (255, 255, 255);
+			//~ PageResultat();
 
 			switch (page) {
 				case 0:
@@ -86,6 +88,9 @@ void gestionEvenement(EvenementGfx evenement)
 					break;
 				case 2:
 
+					break;
+				case 4:
+					PageResultat();
 					break;
 				case 21:
 	Display_TestTop();
@@ -112,6 +117,11 @@ void gestionEvenement(EvenementGfx evenement)
 					}
 					else{
 						Display_TestEnd(score);
+						if(saving==0){
+						SaveScore(score,"JP","SaveTestBoule.txt");
+						saving=1;
+					}
+						
 
 					}
 					break;
@@ -176,6 +186,13 @@ void gestionEvenement(EvenementGfx evenement)
 					// Configure le systeme pour ne plus generer de message Temporisation
 					demandeTemporisation(-1);
 					break;
+				case 't':
+                    if(page==2){
+                    page=21;
+                }
+                    else if(page ==21)
+                    page=2;
+                    break;
 			}
 			break;
 
@@ -201,7 +218,7 @@ void gestionEvenement(EvenementGfx evenement)
 
 						break;
 					case 21:
-check = Check_Circle(circle);
+						check = Check_Circle(circle);
 
 
 					if(partie==0){
@@ -220,13 +237,16 @@ check = Check_Circle(circle);
 							page = 2;
 							partie = 0;
 							score = -1;
+							saving=0;
 						}
 						else if (Check_TestRejouer()==1) {
 							partie = 1;
 							score = 0;
 							time_debut = time(NULL);
+							saving=0;
 
 						}
+						
 					}
 						break;
 					case 22:
