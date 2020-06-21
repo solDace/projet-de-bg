@@ -38,7 +38,8 @@ int main(int argc, char **argv)
 */
 int page = 0;
 
-
+int check = 0;
+int score=0;
 
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */
