@@ -34,7 +34,13 @@ int main(int argc, char **argv)
 */
 int page = 0;
 
+time_t time_debut = 0;
+time_t time_actuel= 0;
 
+coord circle;
+int check = 0; // Check:  0=pas cliqué
+int score=-1;
+int partie=0;
 
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */
@@ -82,7 +88,32 @@ void gestionEvenement(EvenementGfx evenement)
 
 					break;
 				case 21:
+	Display_TestTop();
+					Display_TestName("Test du cercle");
+					if(partie==0){
+						Display_TestBegin();
+					}
+					else if(partie==1){
+						time_actuel = time(NULL);
+						if(check ==0)
+						circle = Display_Circle (circle);
+						else{
+							circle.x = 0;
+							circle.y = 0;
+							circle = Display_Circle (circle);
+							check=0;
+							score ++;
+						}
+						Display_TestScore(score);
+						Display_TestTime(time_debut, time_actuel);
+						if( (unsigned long) difftime( time_actuel, time_debut ) >= 5){
+							partie++;
+						}
+					}
+					else{
+						Display_TestEnd(score);
 
+					}
 					break;
 				case 22:
 
@@ -173,7 +204,33 @@ void gestionEvenement(EvenementGfx evenement)
 
 						break;
 					case 22:
+	check = Check_Circle(circle);
 
+
+					if(partie==0){
+						check = Check_TestBegin();
+						if (check==1) {
+							partie++;
+							time_debut = time(NULL);
+						}
+					}
+					else if(partie==1){
+						check = Check_Circle(circle);
+
+					}
+					else{
+						if (Check_TestQuitter()==1) {
+							page = 2;
+							partie = 0;
+							score = -1;
+						}
+						else if (Check_TestRejouer()==1) {
+							partie = 1;
+							score = 0;
+							time_debut = time(NULL);
+
+						}
+					}
 						break;
 					case 23:
 
