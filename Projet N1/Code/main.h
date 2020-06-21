@@ -34,6 +34,8 @@ typedef struct  coord{
 
 void traceMenu();
 int checkMenu();
+void menuFlex();
+int checkFlex();
 
 void Display_TestTop();
 void Display_TestName(char* name);
