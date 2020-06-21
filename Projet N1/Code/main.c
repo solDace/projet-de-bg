@@ -106,7 +106,7 @@ void gestionEvenement(EvenementGfx evenement)
 						}
 						Display_TestScore(score);
 						Display_TestTime(time_debut, time_actuel);
-						if( (unsigned long) difftime( time_actuel, time_debut ) >= 5){
+						if( (unsigned long) difftime( time_actuel, time_debut ) >= 15){
 							partie++;
 						}
 					}
