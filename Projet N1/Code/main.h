@@ -23,7 +23,6 @@
 
 void traceMenu();
 int checkMenu();
-void menuMem();
 
 
 void Display_TestTop();
