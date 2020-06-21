@@ -25,21 +25,16 @@ int main(int argc, char **argv)
 }
 
 /* variable désignant la page active
-
 0 = Menu principal
-
-1 = Menu Rémoire
-
+1 = Menu Mémoire
 2 = Menu Réflex
-21 = Test cercle
-
-3 = Menu syncrhonisation
-
+21 = Test Cercle
+3 = Menu Syncrhonisation
+4 = Menu Résultats
 */
 int page = 0;
 
-int check = 0;// Check:  0=pas cliqué 
-int score=0;
+
 
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */
@@ -78,10 +73,10 @@ void gestionEvenement(EvenementGfx evenement)
 
 			switch (page) {
 				case 0:
-
+					traceMenu();
 					break;
 				case 1:
-
+					menuMem();
 					break;
 				case 2:
 
@@ -166,7 +161,7 @@ void gestionEvenement(EvenementGfx evenement)
 
 				switch (page) {
 					case 0:
-
+						page = checkMenu();
 						break;
 					case 1:
 
