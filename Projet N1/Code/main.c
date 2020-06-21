@@ -85,7 +85,7 @@ void gestionEvenement(EvenementGfx evenement)
 			effaceFenetre (255, 255, 255);
 
 			switch (page) {
-				
+
 				case -2:
 						if(partie==0){
 							Display_MsgAccueil();
@@ -99,10 +99,13 @@ void gestionEvenement(EvenementGfx evenement)
 					traceMenu();
 					break;
 				case 1:
-					
+					menuMem();
 					break;
 				case 2:
 					menuFlex();
+					break;
+				case 3:
+					menuSync();
 					break;
 				case 4:
 					PageResultat(name);
@@ -136,7 +139,7 @@ void gestionEvenement(EvenementGfx evenement)
 						SaveScore(score,name,"SaveTestBoule.txt");
 						saving=1;
 					}
-						
+
 
 					}
 					break;
@@ -220,7 +223,7 @@ void gestionEvenement(EvenementGfx evenement)
 				else
 					strncat(name, &text, 1);
 			}
-			
+
 			else if(partie ==1){
 				page=0;
 				partie=0;
@@ -244,13 +247,17 @@ void gestionEvenement(EvenementGfx evenement)
 						page = checkMenu();
 						break;
 					case 1:
-
+						page = checkMem();
 						break;
 					case 2:
 						page = checkFlex();
 						break;
+					case 3:
+						page = checkSync();
+						break;
 					case 4:
 						page = CheckLeave();
+						break;
 					case 21:
 						check = Check_Circle(circle);
 
@@ -280,11 +287,11 @@ void gestionEvenement(EvenementGfx evenement)
 							saving=0;
 
 						}
-						
+
 					}
 						break;
 					case 22:
-	
+
 						break;
 					case 23:
 
