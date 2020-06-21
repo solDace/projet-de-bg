@@ -25,6 +25,7 @@ int main(int argc, char **argv)
 }
 
 /* variable désignant la page active
+-2 = Connexion
 0 = Menu principal
 1 = Menu Mémoire
 2 = Menu Réflex
@@ -42,6 +43,11 @@ int check = 0; // Check:  0=pas cliqué
 int score=-1;
 int partie=0;
 int saving=0;
+
+int listen=1;
+
+char name[MAX_NAME]="";
+char text;
 
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */
@@ -79,6 +85,15 @@ void gestionEvenement(EvenementGfx evenement)
 			effaceFenetre (255, 255, 255);
 
 			switch (page) {
+				case -2:
+				if(partie==0){
+					Display_MsgAccueil();
+				}
+				if(partie==1){
+
+					Display_MsgBienvenue(name);
+				}
+				break;
 				case 0:
 					traceMenu();
 					break;
@@ -92,7 +107,7 @@ void gestionEvenement(EvenementGfx evenement)
 					PageResultat();
 					break;
 				case 21:
-	Display_TestTop();
+					Display_TestTop();
 					Display_TestName("Test du cercle");
 					if(partie==0){
 						Display_TestBegin();
@@ -148,6 +163,7 @@ void gestionEvenement(EvenementGfx evenement)
 		case Clavier:
 			printf("%c : ASCII %d\n", caractereClavier(), caractereClavier());
 
+		if(listen!=1){
 			switch (caractereClavier())
 			{
 				case 'Q': /* Pour sortir quelque peu proprement du programme */
@@ -192,6 +208,21 @@ void gestionEvenement(EvenementGfx evenement)
                     else if(page ==21)
                     page=2;
                     break;
+			}
+		else{
+			if(partie==0){
+				text = caractereClavier();
+				strncat(name, &text, 1);
+				if(caractereClavier()==13){
+					partie++;
+				}
+			}
+
+			else if(partie ==1){
+				page=0;
+				partie=0;
+				listen=0;
+			}
 			}
 			break;
 
