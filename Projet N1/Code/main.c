@@ -96,7 +96,7 @@ void gestionEvenement(EvenementGfx evenement)
 						}
 				break;
 				case 0:
-					traceMenu();
+					traceMenu(name);
 					break;
 				case 1:
 					menuMem();
@@ -109,6 +109,15 @@ void gestionEvenement(EvenementGfx evenement)
 					break;
 				case 4:
 					PageResultat(name);
+					break;
+				case 11:
+
+					break;
+				case 12:
+
+					break;
+				case 13:
+
 					break;
 				case 21:
 					Display_TestTop();
@@ -136,7 +145,7 @@ void gestionEvenement(EvenementGfx evenement)
 					else{
 						Display_TestEnd(score);
 						if(saving==0){
-						SaveScore(score,name,"SaveTestBoule.txt");
+						SaveScore(score,name,"../Save/TestBoule.txt");
 						saving=1;
 					}
 
@@ -158,6 +167,18 @@ void gestionEvenement(EvenementGfx evenement)
 					break;
 				case 33:
 
+					break;
+				case 888:
+					page=-2;
+					listen=1;
+					strcpy(name,"");
+					break;
+					
+				case 999:
+				
+					libereDonneesImageRGB(&image); /* On libere la structure image,
+					c'est plus propre, meme si on va sortir du programme juste apres */
+					termineBoucleEvenements();
 					break;
 			}
 
