@@ -230,8 +230,6 @@ int ReadScore(int score[MAX_PLAYERS], char pName[MAX_NAME],char files[MAX_NAME])
 			fseek(fil,5,SEEK_CUR);
 			fscanf(fil, "%d \n", &sc);
 
-			//~ strcat(name," \n");
-
 			if(strcmp(name,pName)==0){
 				score[i]=sc;
 				i++;
@@ -294,7 +292,7 @@ void resTest2(char pName[MAX_NAME]){
 
 void resTest3(char pName[MAX_NAME]){
 
-	int D=tailleChaine("Boules",18), Tr=0, hs1=0, hs2=0, hs3=0;
+	int D=tailleChaine("Fast click",18), Tr=0, hs1=0, hs2=0, hs3=0;
 	int score[MAX_TRY];
 	char BS1[MAX_SCORE]="",BS2[MAX_SCORE]="",BS3[MAX_SCORE]="";
 
@@ -302,12 +300,12 @@ void resTest3(char pName[MAX_NAME]){
 	rectangle(408,325,591,500);
 
 	couleurCourante(0,0,0);
-	afficheChaine("Boules",18,408+(183-D)/2,475);
+	afficheChaine("Fast click",18,408+(183-D)/2,475);
 	afficheChaine("1.",12,420,435);
 	afficheChaine("2.",12,420,395);
 	afficheChaine("3.",12,420,350);
 
-	Tr=ReadScore(score,pName,"SaveTestBoule.txt");
+	Tr=ReadScore(score,pName,"../Save/TestBoule.txt");
 	hs1=HS1(score,Tr);
 	hs2=HS2(score,Tr,hs1);
 	hs3=HS3(score,Tr,hs1,hs2);
