@@ -1,7 +1,7 @@
 #include "main.h"
 
-void traceMenu() {
-	float taille2, taille3;
+void traceMenu(char pName[MAX_NAME]) {
+	float taille2, taille3, taille4,taille5,taille6,taille7;
 	//triangle central
 	couleurCourante(213, 136, 120);
 	triangle(375, 400, 625, 400, 500, 200);
@@ -20,6 +20,15 @@ void traceMenu() {
 	//titre
 	Display_TestTop();
 	Display_TestName("Test Checker");
+	//bouton quitter
+	couleurCourante(220,220,220);
+	rectangle(LargeurFenetre-60,0,LargeurFenetre,40);
+	//bouton identification
+	couleurCourante(220,220,220);
+	rectangle(0,0,80,40);
+	//bouton connecté
+	couleurCourante(220,220,220);
+	rectangle(300,100,700,150);
 	//titre triangle haut
 	couleurCourante(0, 0, 0);
 	taille2 = tailleChaine("Memoire", 24);
@@ -34,6 +43,20 @@ void traceMenu() {
 	//titre triangle gauche
 	couleurCourante(0, 0, 0);
 	afficheChaine("Synchro", 24, 322, 262);
+	//titre quitter
+	couleurCourante(0, 0, 0);
+	taille4 = tailleChaine("Quitter", 15);
+	afficheChaine("Quitter", 15,(LargeurFenetre-60)+(60-taille4)/2, 15);
+	//titre identification
+	couleurCourante(0, 0, 0);
+	taille5 = tailleChaine("Identification", 12);
+	afficheChaine("Identification", 12,(80-taille5)/2, 15);
+	//titre Connecté
+	couleurCourante(0, 0, 0);
+	taille6 = tailleChaine("Connecte en tant que :", 15);
+	taille7 = tailleChaine(pName, 15);
+	afficheChaine("Connecte en tant que :", 15,300+(400-(taille6+taille7+15))/2, 120);
+	afficheChaine(pName, 15,(300+(400-(taille6+taille7))/2)+taille6+15, 120);
 }
 
 int checkMenu() {
@@ -62,6 +85,17 @@ int checkMenu() {
 		active = 4;
 		printf("Menu Résultats\n");
 	}
+	//bouton quitter
+	if(abscisseSouris() <= LargeurFenetre && ordonneeSouris() >= 0 && abscisseSouris() >= LargeurFenetre-60 && ordonneeSouris() <= 40){
+		active = 999;
+		printf("Programme fermé\n");
+	}
+	//bouton identification
+	if(abscisseSouris() <= 80 && ordonneeSouris() >= 0 && abscisseSouris() >= 0 && ordonneeSouris() <= 40){
+		active = 888;
+		printf("Choix d'un nouvel identifiant...\n");
+	}
+	
 	return active;
 }
 
@@ -98,7 +132,7 @@ void menuFlex() {
 }
 
 int checkFlex() {
-	int active = 0;
+	int active = 2;
 	//triangle central
 	if(abscisseSouris() >= 375 && abscisseSouris() <= 625 && ordonneeSouris() <= 500 && ordonneeSouris() >= 300) {
 		active = 21;
@@ -106,12 +140,12 @@ int checkFlex() {
 	}
 	//triangle gauche
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 570 && abscisseSouris() <= 750) {
-		active = 2;
+		active = 22;
 		printf("Vers Test 2\n");
 	}
 	//triangle droite
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 250 && abscisseSouris() <= 430) {
-		active = 3;
+		active = 23;
 		printf("Vers Test 3\n");
 	}
 	//bouton retour
@@ -166,20 +200,20 @@ void menuMem() {
 }
 
 int checkMem() {
-	int active = 0;
+	int active = 1;
 	//triangle central
 	if(abscisseSouris() >= 375 && abscisseSouris() <= 625 && ordonneeSouris() <= 500 && ordonneeSouris() >= 300) {
-		active = 21;
+		active = 11;
 		printf("Vers Test 1\n");
 	}
 	//triangle gauche
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 570 && abscisseSouris() <= 750) {
-		active = 2;
+		active = 12;
 		printf("Vers Test 2\n");
 	}
 	//triangle droite
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 250 && abscisseSouris() <= 430) {
-		active = 3;
+		active = 13;
 		printf("Vers Test 3\n");
 	}
 	//bouton retour
@@ -223,20 +257,20 @@ void menuSync() {
 }
 
 int checkSync() {
-	int active = 0;
+	int active = 3;
 	//triangle central
 	if(abscisseSouris() >= 375 && abscisseSouris() <= 625 && ordonneeSouris() <= 500 && ordonneeSouris() >= 300) {
-		active = 21;
+		active = 31;
 		printf("Vers Test 1\n");
 	}
 	//triangle gauche
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 570 && abscisseSouris() <= 750) {
-		active = 2;
+		active = 32;
 		printf("Vers Test 2\n");
 	}
 	//triangle droite
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 250 && abscisseSouris() <= 430) {
-		active = 3;
+		active = 33;
 		printf("Vers Test 3\n");
 	}
 	//bouton retour
