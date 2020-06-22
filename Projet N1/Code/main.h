@@ -34,7 +34,7 @@ typedef struct  coord{
 	int y;
 }coord;
 
-void traceMenu();
+void traceMenu(char pName[MAX_NAME]);
 int checkMenu();
 void menuFlex();
 int checkFlex();
