@@ -12,7 +12,7 @@
 #include <stdlib.h> // Pour pouvoir utiliser exit()
 #include <math.h> // Pour pouvoir utiliser sin() et cos()
 #include <string.h>
-#include <time.h> // Pour pouvoir utiliser srand() et time()
+#include <sys/time.h> // Pour pouvoir utiliser srand() et time()
 
 
 #include "../lib/BmpLib.h" // Cet include permet de manipuler des fichiers BMP
@@ -27,7 +27,7 @@
 #define MAX_NAME 30
 #define MAX_PLAYERS 50
 #define MAX_SCORE 50
-
+#define MAX_PATTERN 8
 
 typedef struct  coord{
 	int x;
