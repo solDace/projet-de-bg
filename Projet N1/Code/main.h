@@ -47,7 +47,7 @@ int checkSync();
 void Display_TestTop();
 void Display_TestName(char* name);
 void Display_TestScore(int score);
-void Display_TestTime(time_t old, time_t new);
+void Display_TestTime(struct timeval old, struct timeval new);
 void Display_TestBegin();
 coord Display_Circle (coord ancien);
 void Display_TestEnd(int score);
