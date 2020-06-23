@@ -53,6 +53,10 @@ coord Display_Circle (coord ancien);
 void Display_TestEnd(int score);
 void Display_MsgAccueil();
 void Display_MsgBienvenue(char *name);
+void Display_ColorButtons();
+void Create_Random_Pattern(int tab[MAX_PATTERN], int dif);
+void Display_TestMemoire(int mode);
+
 // Fonction de trace de cercle
 void cercle(float centreX, float centreY, float rayon);
 
@@ -61,7 +65,7 @@ int Check_Circle(coord circle);
 int Check_TestBegin();
 int Check_TestQuitter();
 int Check_TestRejouer();
-
+int check_Pattern(int );
 
 
 void resTest1(char pName[MAX_NAME]);
