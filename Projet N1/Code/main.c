@@ -161,7 +161,7 @@ gettimeofday(&time_actuel, NULL);
 			else{
 				Display_TestEnd(score);
 				if(saving==0){
-					SaveScore(score,name,"SaveTestPattern.txt");
+					SaveScore(score,name,"../Save/TestPattern.txt");
 					saving=1;
 				}
 

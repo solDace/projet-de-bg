@@ -83,13 +83,12 @@ strcat(text, ScoreText);
 
 }
 
-void Display_TestTime(time_t old, time_t new){
+void Display_TestTime(struct timeval old, struct timeval new){
 
 int taille;
 char ScoreText[10], text[20];
 sprintf(text, "Time : ");
 sprintf(ScoreText, "%ld s", ((long)(((( new.tv_sec - old.tv_sec) * 1000000) + new.tv_usec) - (old.tv_usec)))/1000000);
-
 
 
 strcat(text, ScoreText);
@@ -278,8 +277,33 @@ void PageResultat(char pName[MAX_NAME]){
 
 void resTest1(char pName[MAX_NAME]){
 
+	
+	int D=tailleChaine("Simon Says",18), Tr=0, hs1=0, hs2=0, hs3=0;
+	int score[MAX_TRY];
+	char BS1[MAX_SCORE]="",BS2[MAX_SCORE]="",BS3[MAX_SCORE]="";
+	
 	couleurCourante(170,170,170);
 	rectangle(75,400,258,650);
+
+	couleurCourante(0,0,0);
+	afficheChaine("Simon Says",18,75+(183-D)/2,625);
+	afficheChaine("1.",12,87,575);
+	afficheChaine("2.",12,87,508);
+	afficheChaine("3.",12,87,442);
+
+	Tr=ReadScore(score,pName,"../Save/TestPattern.txt");
+	hs1=HS1(score,Tr);
+	hs2=HS2(score,Tr,hs1);
+	hs3=HS3(score,Tr,hs1,hs2);
+
+	sprintf(BS1,"%d",hs1);
+	sprintf(BS2,"%d",hs2);
+	sprintf(BS3,"%d",hs3);
+
+	afficheChaine(BS1,12,107,575);
+	afficheChaine(BS2,12,107,508);
+	afficheChaine(BS3,12,107,442);
+	
 
 }
 

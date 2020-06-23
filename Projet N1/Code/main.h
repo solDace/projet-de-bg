@@ -29,6 +29,7 @@
 #define MAX_SCORE 50
 #define MAX_PATTERN 8
 
+
 typedef struct  coord{
 	int x;
 	int y;
