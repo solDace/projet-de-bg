@@ -35,8 +35,10 @@ int main(int argc, char **argv)
 */
 int page = -2;
 
-time_t time_debut = 0;
-time_t time_actuel= 0;
+struct timeval time_debut;
+struct timeval time_actuel;
+struct timeval time_niveau;
+
 
 coord circle;
 int check = 0; // Check:  0=pas cliqué
@@ -48,6 +50,10 @@ int listen=1;
 
 char name[MAX_NAME]="";
 char text;
+
+int pattern[MAX_PATTERN];
+int niveau = 1;
+int avancee;
 
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */
@@ -101,23 +107,75 @@ void gestionEvenement(EvenementGfx evenement)
 				case 1:
 					menuMem();
 					break;
-				case 2:
-					menuFlex();
-					break;
-				case 3:
-					menuSync();
-					break;
-				case 4:
-					PageResultat(name);
-					break;
 				case 11:
+gettimeofday(&time_actuel, NULL);
 
+			Display_TestTop();
+			Display_TestName("Test du Pattern");
+			if(partie==0){
+				Display_TestBegin();
+			}
+			else if(partie==1){
+
+				Display_TestMemoire(partie);
+
+
+				if (pattern[avancee]!=0) {
+					Display_ColorButtons(pattern[avancee]);
+				}
+				else{
+					partie++;
+					avancee=0;
+}
+				if(/* (unsigned long) difftime( time_actuel, time_niveau )*/ (long)(  ((( time_actuel.tv_sec - time_niveau.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_niveau.tv_usec))/1000000 >= 1){
+					Display_ColorButtons(0);
+
+
+
+
+				if((long)(  ((( time_actuel.tv_sec - time_niveau.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_niveau.tv_usec)) >= 1200000 ){
+					if(avancee!=MAX_PATTERN){
+						avancee++;
+					}
+					else{
+						partie++;
+						avancee = 0;
+					}
+					gettimeofday(&time_niveau, NULL);
+				}
+			}
+
+
+				Display_TestScore(score);
+
+			}
+			else if(partie==2){
+
+
+
+				Display_ColorButtons(0);
+
+				Display_TestScore(score);
+
+			}
+			else{
+				Display_TestEnd(score);
+				if(saving==0){
+					SaveScore(score,name,"SaveTestPattern.txt");
+					saving=1;
+				}
+
+			}
+			Display_TestMemoire(partie);
 					break;
 				case 12:
 
 					break;
 				case 13:
 
+					break;
+				case 2:
+					menuFlex();
 					break;
 				case 21:
 					Display_TestTop();
@@ -126,7 +184,7 @@ void gestionEvenement(EvenementGfx evenement)
 						Display_TestBegin();
 					}
 					else if(partie==1){
-						time_actuel = time(NULL);
+				gettimeofday(&time_actuel, NULL);
 						if(check ==0)
 						circle = Display_Circle (circle);
 						else{
@@ -138,7 +196,7 @@ void gestionEvenement(EvenementGfx evenement)
 						}
 						Display_TestScore(score);
 						Display_TestTime(time_debut, time_actuel);
-						if( (unsigned long) difftime( time_actuel, time_debut ) >= 15){
+				if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_debut.tv_usec))/1000000 >= 15){
 							partie++;
 						}
 					}
@@ -158,6 +216,9 @@ void gestionEvenement(EvenementGfx evenement)
 				case 23:
 
 					break;
+				case 3:
+					menuSync();
+					break;
 
 				case 31:
 
@@ -167,6 +228,9 @@ void gestionEvenement(EvenementGfx evenement)
 					break;
 				case 33:
 
+					break;
+				case 4:
+					PageResultat(name);
 					break;
 				case 888:
 					page=-2;
@@ -226,13 +290,7 @@ void gestionEvenement(EvenementGfx evenement)
 					// Configure le systeme pour ne plus generer de message Temporisation
 					demandeTemporisation(-1);
 					break;
-				case 't':
-                    if(page==2){
-                    page=21;
-                }
-                    else if(page ==21)
-                    page=2;
-                    break;
+				
 			}
 		}
 		else{
@@ -270,14 +328,71 @@ void gestionEvenement(EvenementGfx evenement)
 					case 1:
 						page = checkMem();
 						break;
+					case 11:
+						if(partie==0){
+					check = Check_TestBegin();
+					if (check==1) {
+						partie++;
+						gettimeofday(&time_debut, NULL);
+						gettimeofday(&time_niveau, NULL);
+						score = 0;
+						niveau = 1;
+						Create_Random_Pattern(pattern, niveau);
+						avancee=0;
+					}
+				}
+				else if(partie==1){
+
+				}
+				else if(partie ==2){
+					printf("niveau = %d\n",niveau );
+					printf("partie = %d\n",partie );
+					printf("avancee = %d\n",avancee );
+					printf("pattern[avancee] = %d\n", pattern[avancee]);
+					if(check_Pattern(pattern[avancee])==1){
+						score++;
+						avancee++;
+						if(pattern[avancee]==0){
+	 							partie--;
+	 							avancee=0;
+	 							niveau ++;
+	 							Create_Random_Pattern(pattern, niveau);
+	 							gettimeofday(&time_niveau, NULL);
+	 					}
+					}
+					else{
+						partie++;
+						niveau=1;
+						avancee=0;
+						Create_Random_Pattern(pattern, niveau);
+
+					}
+
+				}
+				else{
+					if (Check_TestQuitter()==1) {
+						page = 2;
+						partie = 0;
+						score = -1;
+						saving=0;
+						avancee=0;
+						niveau=1;
+					}
+					else if (Check_TestRejouer()==1) {
+						partie = 1;
+						score = 0;
+						gettimeofday(&time_niveau, NULL);
+						gettimeofday(&time_debut, NULL);
+
+						saving=0;
+						avancee=0;
+						niveau=1;
+					}
+
+				}
+						break;
 					case 2:
 						page = checkFlex();
-						break;
-					case 3:
-						page = checkSync();
-						break;
-					case 4:
-						page = CheckLeave();
 						break;
 					case 21:
 						check = Check_Circle(circle);
@@ -287,7 +402,7 @@ void gestionEvenement(EvenementGfx evenement)
 						check = Check_TestBegin();
 						if (check==1) {
 							partie++;
-							time_debut = time(NULL);
+						gettimeofday(&time_debut, NULL);
 						}
 					}
 					else if(partie==1){
@@ -304,7 +419,7 @@ void gestionEvenement(EvenementGfx evenement)
 						else if (Check_TestRejouer()==1) {
 							partie = 1;
 							score = 0;
-							time_debut = time(NULL);
+						gettimeofday(&time_debut, NULL);
 							saving=0;
 
 						}
@@ -317,6 +432,9 @@ void gestionEvenement(EvenementGfx evenement)
 					case 23:
 
 						break;
+					case 3:
+						page = checkSync();
+						break;
 
 					case 31:
 
@@ -326,6 +444,9 @@ void gestionEvenement(EvenementGfx evenement)
 						break;
 					case 33:
 
+						break;
+					case 4:
+						page = CheckLeave();
 						break;
 				}
 			}
