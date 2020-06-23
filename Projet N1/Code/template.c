@@ -88,8 +88,8 @@ void Display_TestTime(time_t old, time_t new){
 int taille;
 char ScoreText[10], text[20];
 sprintf(text, "Time : ");
-unsigned long secondes = (unsigned long) difftime( new, old );
-sprintf(ScoreText, "%ld s", secondes);
+sprintf(ScoreText, "%ld s", ((long)(((( new.tv_sec - old.tv_sec) * 1000000) + new.tv_usec) - (old.tv_usec)))/1000000);
+
 
 
 strcat(text, ScoreText);
