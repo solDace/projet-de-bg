@@ -1,5 +1,5 @@
-main : main.o accueil.o menu.o template.o reflex.o ../lib/libisentlib.a
-	gcc -Wall -o main main.o accueil.o menu.o reflex.o template.o ../lib/libisentlib.a -lm -lglut -lGL -lX11
+main : main.o accueil.o menu.o memoire.o template.o reflex.o ../lib/libisentlib.a
+	gcc -Wall -o main main.o accueil.o memoire.o menu.o reflex.o template.o ../lib/libisentlib.a -lm -lglut -lGL -lX11
 
 main.o : main.c
 	gcc -c -Wall main.c
@@ -16,5 +16,7 @@ menu.o : menu.c
 accueil.o : accueil.c
 	gcc -c -Wall accueil.c
 	
+memoire.o : memoire.c
+	gcc -c -Wall memoire.c
 clean:
 	rm *.o
