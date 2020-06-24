@@ -115,4 +115,13 @@ int point_duocouleur(int c , int ce);
 void afficheJF();
 
 
-
+int** chasard();
+int nbr_one_matrice(int **matrice);
+void init_tab(int tab[3][4]);
+void freefct2(int **matrice);
+int compte_zero(int** matrice);
+void init_carre(int **matrice);
+void carre_gris(int** matrice,int tab[3][4]);
+void carre_noir(int mat,int tab);
+void verification(int tab[3][4]);
+int victoire(int** matrice,int tab[3][4]);
