@@ -54,7 +54,7 @@ coord Display_Circle (coord ancien){
   int rayon=20;
 
   if(ancien.x == 0 && ancien.y==0){
-    srand(time(NULL));
+    
     circle.x=rand()%(LargeurFenetre - 40)+20;
     circle.y=rand()%(HauteurFenetre - HauteurFenetre/10 - 40)+20;
   }
@@ -78,3 +78,12 @@ int Check_Circle(coord circle){
   }
   return check;
 }
+
+
+
+
+
+
+
+
+

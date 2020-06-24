@@ -13,6 +13,7 @@ void gestionEvenement(EvenementGfx evenement);
 
 int main(int argc, char **argv)
 {
+	srand(time(NULL));
 	initialiseGfx(argc, argv);
 
 	prepareFenetreGraphique("GfxLib", LargeurFenetre, HauteurFenetre);
@@ -55,6 +56,16 @@ int pattern[MAX_PATTERN];
 int niveau = 1;
 int avancee;
 
+coul couleurecrit[4];
+char tabbleu[4];
+char tabrouge[5];
+char tabvert[4];
+char tabnoir[4];
+char ecritcouleur[4][6]={"bleu","vert","rouge","noir"};
+int c , ce;
+
+int active;
+
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */
 void gestionEvenement(EvenementGfx evenement)
@@ -67,7 +78,7 @@ void gestionEvenement(EvenementGfx evenement)
 	switch (evenement)
 	{
 		case Initialisation:
-
+			active =rand()%2 +4;
 			/* Le message "Initialisation" est envoye une seule fois, au debut du
 			programme : il permet de fixer "image" a la valeur qu'il devra conserver
 			jusqu'a la fin du programme : soit "image" reste a NULL si l'image n'a
@@ -77,6 +88,8 @@ void gestionEvenement(EvenementGfx evenement)
 			// Configure le systeme pour generer un message Temporisation
 			// toutes les 20 millisecondes
 			demandeTemporisation(20);
+			//initecritcouleur(ecritcouleur, tabbleu, tabrouge, tabvert, tabnoir);
+			initcouleurecrit(couleurecrit);
 			break;
 
 		case Temporisation:
@@ -221,9 +234,78 @@ gettimeofday(&time_actuel, NULL);
 					break;
 
 				case 31:
+		gettimeofday(&time_actuel, NULL);
 
+			Display_TestTop();
+			Display_TestName("Test de synchro");
+
+			switch (partie) {
+				case 0:
+				Display_TestBegin();
+				break;
+				case 1:
+				Display_TestScore(score);
+					display_command(partie);
+				if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_debut.tv_usec))/1000000 >= 3){
+					partie++;
+					gettimeofday(&time_debut, NULL);
+				}
+				break;
+				case 2:
+					display_command(active);
+	listen=1;
+	time_actuel.tv_sec = time_actuel.tv_sec -10;
+				Display_TestTime(time_actuel, time_debut);
+					time_actuel.tv_sec = time_actuel.tv_sec +10;
+
+				Display_TestScore(score);
+if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_debut.tv_usec))/1000000 >= 10){
+	partie++;
+}
+				break;
+				case 3:
+				listen=0;
+					Display_TestEnd(score);
+				break;
+			}
 					break;
 				case 32:
+				
+				Display_TestTop();
+					Display_TestName("Test du TextCouleur");
+					if(partie==0){
+						Display_TestBegin();
+					}
+					else if(partie==1){
+				gettimeofday(&time_actuel, NULL);
+				afficheJF();
+				affecritcouleur(ecritcouleur,c,ce,couleurecrit);	
+					
+						
+						if(  (long)(  ((( time_actuel.tv_sec - time_niveau.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_niveau.tv_usec))/1000000 >= 2){
+							ce=rand()%4;
+							c=rand()%4;
+						
+						gettimeofday(&time_niveau, NULL);
+							
+						}
+						
+						
+						Display_TestScore(score);
+						Display_TestTime(time_debut, time_actuel);
+				if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_debut.tv_usec))/1000000 >= 30){
+							partie++;
+						}
+					}
+					else{
+						Display_TestEnd(score);
+						if(saving==0){
+						SaveScore(score,name,"../Save/TestBoule.txt");
+						saving=1;
+					}
+
+
+					}
 
 					break;
 				case 33:
@@ -294,21 +376,33 @@ gettimeofday(&time_actuel, NULL);
 			}
 		}
 		else{
-			if(partie==0){
-				text = caractereClavier();
-				if(caractereClavier()==13){
-					partie++;
-				}
-				else
+			if(page == -2){
+				if(partie==0){
+					text = caractereClavier();
+					if(caractereClavier()==13){
+						partie++;
+					}
+					else
 					strncat(name, &text, 1);
-			}
+				}
 
-			else if(partie ==1){
-				page=0;
-				partie=0;
-				listen=0;
+				else if(partie ==1){
+					page=0;
+					partie=0;
+					listen=0;
+				}
 			}
+			if(page==31){
+				if(CheckSynchro(active)==1){
+					 score++;
+					 active = rand()%2 +4;
+				 }
+				else if(CheckSynchro(active)==2){
+					 score= score-2;
+					 active = rand()%2 +4;
+				 }
 			}
+		}
 			break;
 		case ClavierSpecial:
 			printf("ASCII %d\n", toucheClavier());
@@ -434,12 +528,88 @@ gettimeofday(&time_actuel, NULL);
 						break;
 					case 3:
 						page = checkSync();
+						partie=0;
+						score=0;
 						break;
 
 					case 31:
+	if(partie==0){
+					check = Check_TestBegin();
+					if (check==1) {
+						partie ++;
+						gettimeofday(&time_debut, NULL);
+						score=0;
+					}
+				}
+				else if(partie==1){
 
+
+				}
+				else if(partie==2){
+
+ 				
+
+
+				}
+				else{
+					if (Check_TestQuitter()==1) {
+						page = 3;
+						partie = 0;
+						score = -1;
+						saving=0;
+					}
+					else if (Check_TestRejouer()==1) {
+						partie = 1;
+						score = 0;
+						gettimeofday(&time_debut, NULL);
+						saving=0;
+
+					}
+
+				}
 						break;
 					case 32:
+					
+					if(partie==0){
+						check = Check_TestBegin();
+						if (check==1) {
+							partie++;
+							ce=rand()%4;
+							c=rand()%4;
+						gettimeofday(&time_debut, NULL);
+						gettimeofday(&time_niveau, NULL);
+						}
+					}
+					else if(partie==1){
+						if (point_duocouleur( c , ce)==1) {
+							score++;
+							gettimeofday(&time_niveau, NULL);
+							ce=rand()%4;
+							c=rand()%4;
+						}
+						else if (point_duocouleur( c , ce)==-1) {
+							score--;
+							gettimeofday(&time_niveau, NULL);
+							ce=rand()%4;
+							c=rand()%4;
+						}
+					}
+					else{
+						if (Check_TestQuitter()==1) {
+							page = 2;
+							partie = 0;
+							score = -1;
+							saving=0;
+						}
+						else if (Check_TestRejouer()==1) {
+							partie = 1;
+							score = 0;
+						gettimeofday(&time_debut, NULL);
+							saving=0;
+
+						}
+
+					}
 
 						break;
 					case 33:

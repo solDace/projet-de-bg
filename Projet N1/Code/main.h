@@ -35,6 +35,16 @@ typedef struct  coord{
 	int y;
 }coord;
 
+typedef struct couleur
+{ 
+	
+	int r;
+	int g;
+	int b;
+	
+	
+}coul;
+
 void traceMenu(char pName[MAX_NAME]);
 int checkMenu();
 void menuFlex();
@@ -58,9 +68,20 @@ void Display_ColorButtons();
 void Create_Random_Pattern(int tab[MAX_PATTERN], int dif);
 void Display_TestMemoire(int mode);
 
+void display_command(int );
+int CheckSynchro(int mode);
+
 // Fonction de trace de cercle
 void cercle(float centreX, float centreY, float rayon);
 
+void initabbleu(char tabbleu[]);
+void initabrouge(char tabrouge[]);
+void initabvert(char tabvert[]);
+void initabnoir(char tabnoir[]);
+void initcouleurecrit(coul couleurecrit[]);
+void affecritcouleur(char ecritcouleur[4][6],int c, int ce, coul couleurecrit[]);
+int point_duocouleur(int c , int ce);
+void afficheJF();
 
 int Check_Circle(coord circle);
 int Check_TestBegin();
@@ -83,3 +104,15 @@ int SaveScore(int score, char pName[MAX_NAME],char files[MAX_NAME]);
 int HS1(int score[MAX_TRY],int nb);
 int HS2(int score[MAX_TRY],int nb,int hs1);
 int HS3(int score[MAX_TRY],int nb,int hs1, int hs2);
+
+void initabbleu(char tabbleu[]);
+void initabrouge(char tabrouge[]);
+void initabvert(char tabvert[]);
+void initabnoir(char tabnoir[]);
+void initcouleurecrit(coul couleurecrit[]);
+void affecritcouleur(char ecritcouleur[4][6],int c, int ce, coul couleurecrit[]);
+int point_duocouleur(int c , int ce);
+void afficheJF();
+
+
+
