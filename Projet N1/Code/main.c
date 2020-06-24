@@ -266,6 +266,11 @@ if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actu
 				case 3:
 				listen=0;
 					Display_TestEnd(score);
+					
+						if(saving==0){
+						SaveScore(score,name,"../Save/Synchro.txt");
+						saving=1;
+					}
 				break;
 			}
 					break;
@@ -300,7 +305,7 @@ if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actu
 					else{
 						Display_TestEnd(score);
 						if(saving==0){
-						SaveScore(score,name,"../Save/TestBoule.txt");
+						SaveScore(score,name,"../Save/TextCouleur.txt");
 						saving=1;
 					}
 
