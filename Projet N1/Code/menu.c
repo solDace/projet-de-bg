@@ -122,7 +122,7 @@ void menuFlex() {
 	afficheChaine("Test 2", 24, 232, 262);
 	//titre triangle droite
 	couleurCourante(0, 0, 0);
-	afficheChaine("Test 3", 24, 682, 262);
+	afficheChaine("Resultats", 24, 682, 262);
 	//bouton retour
 	couleurCourante(210, 210, 210);
 	rectangle(0, 710, 50, 680);
@@ -145,8 +145,8 @@ int checkFlex() {
 	}
 	//triangle droite
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 250 && abscisseSouris() <= 430) {
-		active = 23;
-		printf("Vers Test 3\n");
+		active = 4;
+		printf("Vers Resultats\n");
 	}
 	//bouton retour
 	if(abscisseSouris() <= 50 && abscisseSouris() >= 0 && ordonneeSouris() <= 710 && ordonneeSouris() >= 680){
@@ -183,14 +183,14 @@ void menuMem() {
 	triangle(600, 200, 725, 400, 850, 200);
 	//titre triangle central
 	couleurCourante(0, 0, 0);
-	taille = tailleChaine("Test 1", 24);
-	afficheChaine("Test 1", 24, (LargeurFenetre - taille)/2, 422);
+	taille = tailleChaine("Pattern", 24);
+	afficheChaine("Pattern", 24, (LargeurFenetre - taille)/2, 422);
 	//titre triangle gauche
 	couleurCourante(0, 0, 0);
 	afficheChaine("Test 2", 24, 232, 262);
 	//titre triangle droite
 	couleurCourante(0, 0, 0);
-	afficheChaine("Test 3", 24, 682, 262);
+	afficheChaine("Resultat", 24, 682, 262);
 	//bouton retour
 	couleurCourante(210, 210, 210);
 	rectangle(0, 710, 50, 680);
@@ -213,8 +213,8 @@ int checkMem() {
 	}
 	//triangle droite
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 250 && abscisseSouris() <= 430) {
-		active = 13;
-		printf("Vers Test 3\n");
+		active = 4;
+		printf("Vers Resultats\n");
 	}
 	//bouton retour
 	if(abscisseSouris() <= 50 && abscisseSouris() >= 0 && ordonneeSouris() <= 710 && ordonneeSouris() >= 680){
@@ -240,14 +240,14 @@ void menuSync() {
 	triangle(600, 200, 725, 400, 850, 200);
 	//titre triangle central
 	couleurCourante(0, 0, 0);
-	taille = tailleChaine("Test 1", 24);
-	afficheChaine("Test 1", 24, (LargeurFenetre - taille)/2, 422);
+	taille = tailleChaine("Synchro", 24);
+	afficheChaine("Synchro", 24, (LargeurFenetre - taille)/2, 422);
 	//titre triangle gauche
 	couleurCourante(0, 0, 0);
 	afficheChaine("CoulText", 24, 230, 262);
 	//titre triangle droite
 	couleurCourante(0, 0, 0);
-	afficheChaine("Test 3", 24, 682, 262);
+	afficheChaine("Resultats", 24, 682, 262);
 	//bouton retour
 	couleurCourante(210, 210, 210);
 	rectangle(0, 710, 50, 680);
@@ -265,8 +265,8 @@ int checkSync() {
 	}
 	//triangle gauche
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 570 && abscisseSouris() <= 750) {
-		active = 33;
-		printf("Vers Test 3\n");
+		active = 4;
+		printf("Vers Resultats\n");
 	}
 	//triangle droite
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 250 && abscisseSouris() <= 430) {
