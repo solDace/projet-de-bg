@@ -2,7 +2,8 @@
 
 
 
-
+int **matrice = NULL;
+int tab[3][4],NbrOneMatrice = 0,win_game = 0;
 
 
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
@@ -21,7 +22,7 @@ int main(int argc, char **argv)
 	/* Lance la boucle qui aiguille les evenements sur la fonction gestionEvenement ci-apres,
 		qui elle-meme utilise fonctionAffichage ci-dessous */
 	lanceBoucleEvenements();
-
+	
 	return 0;
 }
 
@@ -182,7 +183,50 @@ gettimeofday(&time_actuel, NULL);
 			Display_TestMemoire(partie);
 					break;
 				case 12:
+					gettimeofday(&time_actuel, NULL);
+					Display_TestTop();
+					Display_TestName("Test du Pattern");
+					if(partie==0){
+						Display_TestBegin();
+					}
+					else if(partie==1){
+						
+		
+								
+						init_carre(matrice);
+					
 
+
+						Display_TestScore(score);
+						Display_TestTime(time_debut, time_actuel);
+					
+						
+					
+						if(  (long)(  ((( time_actuel.tv_sec - time_niveau.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_niveau.tv_usec))/1000000 >= 1){
+								partie++;
+							}
+					}
+					else if(partie==2){
+						
+						carre_gris(matrice,tab);
+							
+
+							
+						
+						Display_TestScore(score);
+						Display_TestTime(time_debut, time_actuel);
+						if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_debut.tv_usec))/1000000 >= 30){
+								partie++;
+						}
+					}
+						
+					else{
+						Display_TestEnd(score);
+						if(saving==0){
+						SaveScore(score,name,".txt");
+						saving=1;
+					}
+}
 					break;
 				case 13:
 
@@ -329,6 +373,7 @@ if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actu
 				
 					libereDonneesImageRGB(&image); /* On libere la structure image,
 					c'est plus propre, meme si on va sortir du programme juste apres */
+					freefct2(matrice);
 					termineBoucleEvenements();
 					break;
 			}
@@ -346,6 +391,7 @@ if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actu
 				case 'q':
 					libereDonneesImageRGB(&image); /* On libere la structure image,
 					c'est plus propre, meme si on va sortir du programme juste apres */
+					freefct2(matrice);
 					termineBoucleEvenements();
 					break;
 
@@ -490,6 +536,69 @@ if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actu
 
 				}
 						break;
+					case 12:
+					
+						if(partie==0){
+							check = Check_TestBegin();
+							
+							if (check==1) {
+								partie++;
+								gettimeofday(&time_debut, NULL);
+								gettimeofday(&time_niveau, NULL);
+								score = 0;
+								matrice = chasard();
+								NbrOneMatrice = nbr_one_matrice(matrice);
+								printf("One = %d\n",NbrOneMatrice);
+								init_tab(tab);
+							}
+							
+						}
+								
+						else if(partie==1){
+								
+
+						}
+						else if(partie==2){
+							
+								verification(tab);
+								win_game = victoire(matrice,tab);
+								
+																
+								if (win_game == NbrOneMatrice){
+									partie = 1;
+									score++;
+									gettimeofday(&time_niveau, NULL);
+									matrice = chasard();
+									NbrOneMatrice = nbr_one_matrice(matrice);
+									printf("One = %d\n",NbrOneMatrice);
+									init_tab(tab);
+								
+									}
+									
+								else if (win_game >= NbrOneMatrice ){
+									partie++;
+									}
+									
+							}
+						else{
+							if (Check_TestQuitter()==1) {
+								page = 2;
+								partie = 0;
+								
+								score = -1;
+								saving=0;
+							}
+							else if (Check_TestRejouer()==1) {
+								partie = 0;
+								score = 0;
+								saving=0;
+								gettimeofday(&time_niveau, NULL);
+								gettimeofday(&time_debut, NULL);
+
+							}
+
+						}
+					break;
 					case 2:
 						page = checkFlex();
 						break;
