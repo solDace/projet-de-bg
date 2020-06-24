@@ -373,8 +373,9 @@ if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actu
 				
 					libereDonneesImageRGB(&image); /* On libere la structure image,
 					c'est plus propre, meme si on va sortir du programme juste apres */
-					freefct2(matrice);
+					
 					termineBoucleEvenements();
+					freefct2(matrice);
 					break;
 			}
 
@@ -391,8 +392,8 @@ if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actu
 				case 'q':
 					libereDonneesImageRGB(&image); /* On libere la structure image,
 					c'est plus propre, meme si on va sortir du programme juste apres */
-					freefct2(matrice);
 					termineBoucleEvenements();
+					freefct2(matrice);
 					break;
 
 				case 'F':
