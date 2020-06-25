@@ -1,5 +1,25 @@
 #include "main.h"
 
+
+/**
+ * \file menu.c
+ * \brief Fonctions affichage des menus et leur hitbox.
+ * \author Thomas.B
+ * \version 1.0
+ * \date 25 Juin 2020
+ *
+ */
+ 
+ 
+ /**
+ * \fn void traceMenu (char pName [MAX_NAME])
+ * \brief Affichage menu principal
+ *
+ * \param Nom de la personne connectée
+ * \return none
+ */
+ 
+
 void traceMenu(char pName[MAX_NAME]) {
 	float taille2, taille3, taille4,taille5,taille6,taille7;
 	//triangle central
@@ -59,6 +79,14 @@ void traceMenu(char pName[MAX_NAME]) {
 	afficheChaine(pName, 15,(300+(400-(taille6+taille7))/2)+taille6+15, 120);
 }
 
+/**
+ * \fn int checkMenu ()
+ * \brief hitbox menu principal
+ *
+ * \param none
+ * \return adresse de la page choisie
+ */
+ 
 int checkMenu() {
 	int active = 0;
 	//triangle memoire
@@ -99,6 +127,14 @@ int checkMenu() {
 	return active;
 }
 
+ /**
+ * \fn void menuFlex ()
+ * \brief Affichage menu reflex
+ *
+ * \param none
+ * \return none
+ */
+ 
 void menuFlex() {
 	float taille;
 	//bandeau
@@ -131,6 +167,14 @@ void menuFlex() {
 	rectangle(10, 702, 48, 688);
 }
 
+ /**
+ * \fn int checkFlex()
+ * \brief hitbox menu reflex
+ *
+ * \param none
+ * \return adresse page choisie
+ */
+ 
 int checkFlex() {
 	int active = 2;
 	//triangle central
@@ -140,13 +184,13 @@ int checkFlex() {
 	}
 	//triangle gauche
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 570 && abscisseSouris() <= 750) {
-		active = 22;
-		printf("Vers Test 2\n");
+		active = 4;
+		printf("Vers Résultats\n");
 	}
 	//triangle droite
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 250 && abscisseSouris() <= 430) {
-		active = 4;
-		printf("Vers Resultats\n");
+		active = 22;
+		printf("Vers Test 2\n");
 	}
 	//bouton retour
 	if(abscisseSouris() <= 50 && abscisseSouris() >= 0 && ordonneeSouris() <= 710 && ordonneeSouris() >= 680){
@@ -156,7 +200,14 @@ int checkFlex() {
 	return active;
 }
 
-
+/**
+ * \fn int CheckLeave ()
+ * \brief hitbox boutton quitter page resultat
+ *
+ * \param none
+ * \return adresse menu principal
+ */
+ 
 int CheckLeave() {
 	int active = 4;
 	//Bouton quitter
@@ -167,6 +218,14 @@ int CheckLeave() {
 	return active;
 }
 
+ /**
+ * \fn void menuMem ()
+ * \brief Affichage menu memoire
+ *
+ * \param none
+ * \return none
+ */
+ 
 void menuMem() {
 	float taille;
 	//bandeau
@@ -183,14 +242,14 @@ void menuMem() {
 	triangle(600, 200, 725, 400, 850, 200);
 	//titre triangle central
 	couleurCourante(0, 0, 0);
-	taille = tailleChaine("Pattern", 24);
-	afficheChaine("Pattern", 24, (LargeurFenetre - taille)/2, 422);
+	taille = tailleChaine("Simon Says", 24);
+	afficheChaine("Simon Says", 24, (LargeurFenetre - taille)/2, 422);
 	//titre triangle gauche
 	couleurCourante(0, 0, 0);
-	afficheChaine("Test 2", 24, 232, 262);
+	afficheChaine("Pattern", 24, 232, 262);
 	//titre triangle droite
 	couleurCourante(0, 0, 0);
-	afficheChaine("Resultat", 24, 682, 262);
+	afficheChaine("Resultats", 24, 682, 262);
 	//bouton retour
 	couleurCourante(210, 210, 210);
 	rectangle(0, 710, 50, 680);
@@ -199,6 +258,15 @@ void menuMem() {
 	rectangle(10, 702, 48, 688);
 }
 
+/**
+ * \fn int checkFlex()
+ * \brief hitbox menu memoire
+ *
+ * \param none
+ * \return adresse test choisie
+ */
+ 
+ 
 int checkMem() {
 	int active = 1;
 	//triangle central
@@ -208,13 +276,13 @@ int checkMem() {
 	}
 	//triangle gauche
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 570 && abscisseSouris() <= 750) {
-		active = 12;
-		printf("Vers Test 2\n");
+		active = 4;
+		printf("Vers Résultats\n");
 	}
 	//triangle droite
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 250 && abscisseSouris() <= 430) {
-		active = 4;
-		printf("Vers Resultats\n");
+		active = 12;
+		printf("Vers Pattern\n");
 	}
 	//bouton retour
 	if(abscisseSouris() <= 50 && abscisseSouris() >= 0 && ordonneeSouris() <= 710 && ordonneeSouris() >= 680){
@@ -224,6 +292,14 @@ int checkMem() {
 	return active;
 }
 
+/**
+ * \fn void menuSync()
+ * \brief Affichage menu synchro
+ *
+ * \param none
+ * \return none
+ */
+ 
 void menuSync() {
 	float taille;
 	//bandeau
@@ -240,11 +316,11 @@ void menuSync() {
 	triangle(600, 200, 725, 400, 850, 200);
 	//titre triangle central
 	couleurCourante(0, 0, 0);
-	taille = tailleChaine("Synchro", 24);
-	afficheChaine("Synchro", 24, (LargeurFenetre - taille)/2, 422);
+	taille = tailleChaine("Text Couleur", 24);
+	afficheChaine("Text Couleur", 24, (LargeurFenetre - taille)/2, 422);
 	//titre triangle gauche
 	couleurCourante(0, 0, 0);
-	afficheChaine("CoulText", 24, 230, 262);
+	afficheChaine("Q et M", 24, 228, 262);
 	//titre triangle droite
 	couleurCourante(0, 0, 0);
 	afficheChaine("Resultats", 24, 682, 262);
@@ -256,22 +332,30 @@ void menuSync() {
 	rectangle(10, 702, 48, 688);
 }
 
+/**
+ * \fn int checkSynch ()
+ * \brief hitbox menu Synchro
+ *
+ * \param none
+ * \return adresse test choisie
+ */
+ 
 int checkSync() {
 	int active = 3;
 	//triangle central
 	if(abscisseSouris() >= 375 && abscisseSouris() <= 625 && ordonneeSouris() <= 500 && ordonneeSouris() >= 300) {
-		active = 31;
-		printf("Vers Test 1\n");
+		active = 32;
+		printf("Q et M\n");
 	}
 	//triangle gauche
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 570 && abscisseSouris() <= 750) {
 		active = 4;
-		printf("Vers Resultats\n");
+		printf("Vers Résultats\n");
 	}
 	//triangle droite
 	if(ordonneeSouris() <= 310 && ordonneeSouris() >= 200 && abscisseSouris() >= 250 && abscisseSouris() <= 430) {
-		active = 32;
-		printf("Vers Test 2\n");
+		active = 31;
+		printf("Text Couleur\n");
 	}
 	//bouton retour
 	if(abscisseSouris() <= 50 && abscisseSouris() >= 0 && ordonneeSouris() <= 710 && ordonneeSouris() >= 680){

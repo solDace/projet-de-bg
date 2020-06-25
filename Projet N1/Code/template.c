@@ -83,6 +83,13 @@ strcat(text, ScoreText);
 
 }
 
+/**
+ * \brief Affichage temps en bas a droite
+ *
+ * \param structure temps
+ * \return none
+ */
+ 
 void Display_TestTime(struct timeval old, struct timeval new){
 
 int taille;
@@ -99,7 +106,14 @@ strcat(text, ScoreText);
 
 }
 
-void Display_TestBegin(){
+/**
+ * \brief affichage des conseils et du "cliquer pour commencer"
+ *
+ * \param valeur permatant de connaitre le test
+ * \return none
+ */
+ 
+void Display_TestBegin(int nb){
 
 	static float xCoin1, yCoin1, xCoin2, yCoin2;
 
@@ -112,13 +126,51 @@ void Display_TestBegin(){
 
 	rectangle( xCoin1,  yCoin1,  xCoin2,  yCoin2);
 
-	int taille;
+	int taille, taille2;
 
 		couleurCourante(120,138,89);
 		taille = tailleChaine("Cliquez sur l'ecran pour commencer", 24);
-		afficheChaine("Cliquez sur l'ecran pour commencer",24, (LargeurFenetre - taille)/2, (HauteurFenetre - HauteurFenetre/10)/2-5);
+		afficheChaine("Cliquez sur l'ecran pour commencer",24, (LargeurFenetre - taille)/2, 250);
+		
+	switch(nb){
+		
+		case 1 :
+			taille2= tailleChaine ("Memoriser les emplacements des carres puis les retrouver",15);
+			afficheChaine("Memoriser les emplacements des carres puis les retrouver",15,LargeurFenetre/8+(6*LargeurFenetre/8-taille2)/2 , 450);
+			break;
+			
+		case 2 :
+			taille2= tailleChaine ("Une suite de couleur a retenir. Soyez pret !",15);
+			afficheChaine("Une suite de couleur a retenir. Soyez pret !",15,LargeurFenetre/8+(6*LargeurFenetre/8-taille2)/2 , 450);
+			
+			break;
+		
+		case 3 :
+			taille2= tailleChaine ("Cliquez sur le cercle le plus de fois possible avant la fin du temps !",15);
+			afficheChaine("Cliquer sur le cercle le plus de fois possible avant la fin du temps !",15,LargeurFenetre/8+(6*LargeurFenetre/8-taille2)/2 , 450);
+			break;
+		case 4 :
+			taille2= tailleChaine ("Presser Q ou M au bon moment, attention a ne pas perdre trop de points",15);
+			afficheChaine("Presser Q ou M au bon moment, attention à ne pas perdre trop de points",15,LargeurFenetre/8+(6*LargeurFenetre/8-taille2)/2 , 450);
+			break;
+		case 5 :
+			taille2= tailleChaine ("Est ce que la couleur correspond au mot ? Attention, ne tardez pas trop !",15);
+			afficheChaine("Est ce que la couleur correspond au mot ? Attention, ne tardez pas trop !",15,LargeurFenetre/8+(6*LargeurFenetre/8-taille2)/2 , 450);
+			break;
+		case 6 :
+			taille2= tailleChaine ("Cliquer sur le cercle le plus de fois possible avant la fin du temps !",15);
+			afficheChaine("Cliquer sur le cercle le plus de fois possible avant la fin du temps !",15,LargeurFenetre/8+(6*LargeurFenetre/8-taille2)/2 , 450);
+			break;
+		}
 }
 
+/**
+ * \brief affichage du score et des boutons rejouer et quitter
+ *
+ * \param le score
+ * \return none
+ */
+ 
 void Display_TestEnd(int score){
 
 	static float xCoin1, yCoin1, xCoin2, yCoin2;
@@ -160,6 +212,13 @@ void Display_TestEnd(int score){
 
 }
 
+/**
+ * \brief check un clique pour commencer le test
+ *
+ * \param none
+ * \return 1 si clique
+ */
+ 
 int Check_TestBegin(){
 
   int check=0;
@@ -170,6 +229,12 @@ int Check_TestBegin(){
   return check;
 }
 
+/**
+ * \brief hitbox bouton quitter
+ *
+ * \param none
+ * \return 1 si cliquer sur bouton
+ */
 
 int Check_TestQuitter(){
 
@@ -181,6 +246,13 @@ int Check_TestQuitter(){
   return check;
 }
 
+/**
+ * \brief hitbox bouton rejouer
+ *
+ * \param none
+ * \return 1 si cliquer sur bouton
+ */
+ 
 int Check_TestRejouer(){
 
   int check=0;
@@ -191,6 +263,13 @@ int Check_TestRejouer(){
   return check;
 }
 
+/**
+ * \brief sauvegarde des scores dans un fichier texte
+ *
+ * \param score, nom joueur et chemin fichier
+ * \return 1 fonctionne correctement, exit failure si pas reussi
+ */
+ 
 int SaveScore(int score, char pName[MAX_NAME],char files[MAX_NAME]){
 	FILE *fil=NULL;
 	fil=fopen(files,"ab");
@@ -207,6 +286,13 @@ int SaveScore(int score, char pName[MAX_NAME],char files[MAX_NAME]){
 
 }
 
+/**
+ * \brief permet de lire le fichier sauvegarde et d'en sortir les score
+ *
+ * \param tableau score, nom de l'utilisateur, chemin du fichier save
+ * \return tableau avec les score correspondant au noms en param
+ */
+ 
 int ReadScore(int score[MAX_PLAYERS], char pName[MAX_NAME],char files[MAX_NAME]){
 	FILE *fil=NULL;
 	fil=fopen(files,"rb");
@@ -291,7 +377,7 @@ void resTest1(char pName[MAX_NAME]){
 	afficheChaine("2.",12,87,508);
 	afficheChaine("3.",12,87,442);
 
-	Tr=ReadScore(score,pName,"../Save/TestPattern.txt");
+	Tr=ReadScore(score,pName,"../Save/TestSimon.txt");
 	hs1=HS1(score,Tr);
 	hs2=HS2(score,Tr,hs1);
 	hs3=HS3(score,Tr,hs1,hs2);
@@ -309,9 +395,31 @@ void resTest1(char pName[MAX_NAME]){
 
 void resTest2(char pName[MAX_NAME]){
 
+	int D=tailleChaine("Pattern",18), Tr=0, hs1=0, hs2=0, hs3=0;
+	int score[MAX_TRY];
+	char BS1[MAX_SCORE]="",BS2[MAX_SCORE]="",BS3[MAX_SCORE]="";
+	
 	couleurCourante(170,170,170);
 	rectangle(75,100,258,350);
+	
+	couleurCourante(0,0,0);
+	afficheChaine("Pattern",18,75+(183-D)/2,325);
+	afficheChaine("1.",12,87,275);
+	afficheChaine("2.",12,87,208);
+	afficheChaine("3.",12,87,142);
 
+	Tr=ReadScore(score,pName,"../Save/TestPattern.txt");
+	hs1=HS1(score,Tr);
+	hs2=HS2(score,Tr,hs1);
+	hs3=HS3(score,Tr,hs1,hs2);
+
+	sprintf(BS1,"%d",hs1);
+	sprintf(BS2,"%d",hs2);
+	sprintf(BS3,"%d",hs3);
+
+	afficheChaine(BS1,12,107,275);
+	afficheChaine(BS2,12,107,208);
+	afficheChaine(BS3,12,107,142);
 }
 
 void resTest3(char pName[MAX_NAME]){
@@ -353,16 +461,62 @@ void resTest4(char pName[MAX_NAME]){
 }
 
 void resTest5(char pName[MAX_NAME]){
-
+	
+	int D=tailleChaine("Text Couleur",18), Tr=0, hs1=0, hs2=0, hs3=0;
+	int score[MAX_TRY];
+	char BS1[MAX_SCORE]="",BS2[MAX_SCORE]="",BS3[MAX_SCORE]="";
+	
 	couleurCourante(170,170,170);
 	rectangle(741,400,924,650);
+	
+	couleurCourante(0,0,0);
+	afficheChaine("Text Couleur",18,741+(183-D)/2,625);
+	afficheChaine("1.",12,753,575);
+	afficheChaine("2.",12,753,508);
+	afficheChaine("3.",12,753,442);
+
+	Tr=ReadScore(score,pName,"../Save/TestTextCouleur.txt");
+	hs1=HS1(score,Tr);
+	hs2=HS2(score,Tr,hs1);
+	hs3=HS3(score,Tr,hs1,hs2);
+
+	sprintf(BS1,"%d",hs1);
+	sprintf(BS2,"%d",hs2);
+	sprintf(BS3,"%d",hs3);
+
+	afficheChaine(BS1,12,783,575);
+	afficheChaine(BS2,12,783,508);
+	afficheChaine(BS3,12,783,442);
 
 }
 
 void resTest6(char pName[MAX_NAME]){
+	
+	int D=tailleChaine("Q and M",18), Tr=0, hs1=0, hs2=0, hs3=0;
+	int score[MAX_TRY];
+	char BS1[MAX_SCORE]="",BS2[MAX_SCORE]="",BS3[MAX_SCORE]="";
 
 	couleurCourante(170,170,170);
 	rectangle(741,100,924,350);
+	
+	couleurCourante(0,0,0);
+	afficheChaine("Q and M",18,741+(183-D)/2,325);
+	afficheChaine("1.",12,753,275);
+	afficheChaine("2.",12,753,208);
+	afficheChaine("3.",12,753,142);
+
+	Tr=ReadScore(score,pName,"../Save/TestSynchro.txt");
+	hs1=HS1(score,Tr);
+	hs2=HS2(score,Tr,hs1);
+	hs3=HS3(score,Tr,hs1,hs2);
+
+	sprintf(BS1,"%d",hs1);
+	sprintf(BS2,"%d",hs2);
+	sprintf(BS3,"%d",hs3);
+
+	afficheChaine(BS1,12,783,275);
+	afficheChaine(BS2,12,783,208);
+	afficheChaine(BS3,12,783,142);
 
 }
 

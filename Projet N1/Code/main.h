@@ -59,7 +59,7 @@ void Display_TestTop();
 void Display_TestName(char* name);
 void Display_TestScore(int score);
 void Display_TestTime(struct timeval old, struct timeval new);
-void Display_TestBegin();
+void Display_TestBegin(int nb);
 coord Display_Circle (coord ancien);
 void Display_TestEnd(int score);
 void Display_MsgAccueil();

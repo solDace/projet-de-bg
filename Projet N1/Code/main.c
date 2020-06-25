@@ -2,8 +2,7 @@
 
 
 
-int **matrice = NULL;
-int tab[3][4],NbrOneMatrice = 0,win_game = 0;
+
 
 
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
@@ -14,7 +13,6 @@ void gestionEvenement(EvenementGfx evenement);
 
 int main(int argc, char **argv)
 {
-	srand(time(NULL));
 	initialiseGfx(argc, argv);
 
 	prepareFenetreGraphique("GfxLib", LargeurFenetre, HauteurFenetre);
@@ -22,7 +20,7 @@ int main(int argc, char **argv)
 	/* Lance la boucle qui aiguille les evenements sur la fonction gestionEvenement ci-apres,
 		qui elle-meme utilise fonctionAffichage ci-dessous */
 	lanceBoucleEvenements();
-	
+
 	return 0;
 }
 
@@ -66,6 +64,9 @@ char ecritcouleur[4][6]={"bleu","vert","rouge","noir"};
 int c , ce;
 
 int active;
+
+int **matrice = NULL;
+int tab[3][4],NbrOneMatrice = 0,win_game = 0;
 
 /* La fonction de gestion des evenements, appelee automatiquement par le systeme
 des qu'une evenement survient */
@@ -125,9 +126,9 @@ void gestionEvenement(EvenementGfx evenement)
 gettimeofday(&time_actuel, NULL);
 
 			Display_TestTop();
-			Display_TestName("Test du Pattern");
+			Display_TestName("Test du Simon Says");
 			if(partie==0){
-				Display_TestBegin();
+				Display_TestBegin(2);
 			}
 			else if(partie==1){
 
@@ -175,7 +176,7 @@ gettimeofday(&time_actuel, NULL);
 			else{
 				Display_TestEnd(score);
 				if(saving==0){
-					SaveScore(score,name,"../Save/TestPattern.txt");
+					SaveScore(score,name,"../Save/TestSimon.txt");
 					saving=1;
 				}
 
@@ -187,50 +188,49 @@ gettimeofday(&time_actuel, NULL);
 					Display_TestTop();
 					Display_TestName("Test du Pattern");
 					if(partie==0){
-						Display_TestBegin();
+						Display_TestBegin(1);
 					}
 					else if(partie==1){
-						
-		
-								
+
+
+
 						init_carre(matrice);
-					
+
 
 
 						Display_TestScore(score);
 						Display_TestTime(time_debut, time_actuel);
-					
-						
-					
+
+
+
 						if(  (long)(  ((( time_actuel.tv_sec - time_niveau.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_niveau.tv_usec))/1000000 >= 1){
 								partie++;
 							}
 					}
 					else if(partie==2){
-						
-						carre_gris(matrice,tab);
-							
 
-							
-						
+						carre_gris(matrice,tab);
+
+
+
+
+
 						Display_TestScore(score);
 						Display_TestTime(time_debut, time_actuel);
 						if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_debut.tv_usec))/1000000 >= 30){
 								partie++;
 						}
 					}
-						
+
 					else{
 						Display_TestEnd(score);
 						if(saving==0){
-						SaveScore(score,name,".txt");
+						SaveScore(score,name,"../Save/TestPattern.txt");
 						saving=1;
 					}
-}
+				}
 					break;
-				case 13:
 
-					break;
 				case 2:
 					menuFlex();
 					break;
@@ -238,7 +238,7 @@ gettimeofday(&time_actuel, NULL);
 					Display_TestTop();
 					Display_TestName("Test du cercle");
 					if(partie==0){
-						Display_TestBegin();
+						Display_TestBegin(3);
 					}
 					else if(partie==1){
 				gettimeofday(&time_actuel, NULL);
@@ -278,14 +278,14 @@ gettimeofday(&time_actuel, NULL);
 					break;
 
 				case 31:
-		gettimeofday(&time_actuel, NULL);
+					gettimeofday(&time_actuel, NULL);
 
 			Display_TestTop();
-			Display_TestName("Test de synchro");
+			Display_TestName("Test de Q and M");
 
 			switch (partie) {
 				case 0:
-				Display_TestBegin();
+				Display_TestBegin(4);
 				break;
 				case 1:
 				Display_TestScore(score);
@@ -297,49 +297,48 @@ gettimeofday(&time_actuel, NULL);
 				break;
 				case 2:
 					display_command(active);
-	listen=1;
-	time_actuel.tv_sec = time_actuel.tv_sec -10;
-				Display_TestTime(time_actuel, time_debut);
-					time_actuel.tv_sec = time_actuel.tv_sec +10;
+					listen=1;
+					time_actuel.tv_sec = time_actuel.tv_sec -10;
+								Display_TestTime(time_actuel, time_debut);
+									time_actuel.tv_sec = time_actuel.tv_sec +10;
+
 
 				Display_TestScore(score);
-if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_debut.tv_usec))/1000000 >= 10){
-	partie++;
-}
+				if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_debut.tv_usec))/1000000 >= 10){
+					partie++;
+				}
 				break;
 				case 3:
 				listen=0;
-					Display_TestEnd(score);
-					
-						if(saving==0){
-						SaveScore(score,name,"../Save/Synchro.txt");
+				Display_TestEnd(score);
+				if(saving==0){
+						SaveScore(score,name,"../Save/TestSynchro.txt");
 						saving=1;
-					}
+				}
 				break;
 			}
 					break;
 				case 32:
-				
-				Display_TestTop();
+					Display_TestTop();
 					Display_TestName("Test du TextCouleur");
 					if(partie==0){
-						Display_TestBegin();
+						Display_TestBegin(5);
 					}
 					else if(partie==1){
 				gettimeofday(&time_actuel, NULL);
 				afficheJF();
 				affecritcouleur(ecritcouleur,c,ce,couleurecrit);	
-					
-						
+
+
 						if(  (long)(  ((( time_actuel.tv_sec - time_niveau.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_niveau.tv_usec))/1000000 >= 2){
 							ce=rand()%4;
 							c=rand()%4;
-						
+
 						gettimeofday(&time_niveau, NULL);
-							
+
 						}
-						
-						
+
+
 						Display_TestScore(score);
 						Display_TestTime(time_debut, time_actuel);
 				if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_debut.tv_usec))/1000000 >= 30){
@@ -349,13 +348,12 @@ if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actu
 					else{
 						Display_TestEnd(score);
 						if(saving==0){
-						SaveScore(score,name,"../Save/TextCouleur.txt");
+						SaveScore(score,name,"../Save/TestTextCouleur.txt");
 						saving=1;
 					}
 
 
 					}
-
 					break;
 				case 33:
 
@@ -371,9 +369,9 @@ if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actu
 					
 				case 999:
 				
+					
 					libereDonneesImageRGB(&image); /* On libere la structure image,
 					c'est plus propre, meme si on va sortir du programme juste apres */
-					
 					termineBoucleEvenements();
 					freefct2(matrice);
 					break;
@@ -390,6 +388,7 @@ if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actu
 			{
 				case 'Q': /* Pour sortir quelque peu proprement du programme */
 				case 'q':
+					
 					libereDonneesImageRGB(&image); /* On libere la structure image,
 					c'est plus propre, meme si on va sortir du programme juste apres */
 					termineBoucleEvenements();
