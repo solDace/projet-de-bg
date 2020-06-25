@@ -23,6 +23,14 @@
 int mod = 999,choix=0,one_matrice = 0,win = 0;
 
 
+/**
+ * \fn void Display_ColorButtons(int carre)
+ * \brief Affichage les carrés
+ *
+ * \param carre numéro du carré à allumer
+ * \return none
+ */
+
 void Display_ColorButtons(int carre){
 
   couleurCourante(100, 0, 0);
@@ -71,6 +79,13 @@ void Display_ColorButtons(int carre){
 
 }
 
+/**
+ * \fn void Display_TestMemoire(int mode)
+ * \brief Affichage le message central
+ *
+ * \param mode attente ou à l'utilisateur de jouer
+ * \return none
+ */
 
 void Display_TestMemoire(int mode){
   int taille;
@@ -85,7 +100,14 @@ else if(mode ==2){
 }
 }
 
-
+/**
+ * \fn void Create_Random_Pattern(int tab[MAX_PATTERN], int dif)
+ * \brief Créé une suite aléatoire d'allumage des boutons
+ *
+ * \param tab tableau contenant la suite des boutons à cliquer
+ * \param dif Difficulté actuel (nombre de boutons à mémoriser)
+ * \return none
+ */
 
 void Create_Random_Pattern(int tab[MAX_PATTERN], int dif){
 
@@ -97,6 +119,14 @@ void Create_Random_Pattern(int tab[MAX_PATTERN], int dif){
   }
 
 }
+
+/**
+ * \fn int check_Pattern(int carre)
+ * \brief hitbox du carré à cliquer
+ *
+ * \param carre nulero du bouton à cliquer
+ * \return 1 si juste / 0 si faux
+ */
 
 int check_Pattern(int carre){
   int check=0;
@@ -138,6 +168,7 @@ int check_Pattern(int carre){
 
   return check;
 }
+
 
 int** chasard(){
 
