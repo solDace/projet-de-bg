@@ -64,7 +64,7 @@ char ecritcouleur[4][6]={"bleu","vert","rouge","noir"};
 int c , ce;
 
 int active;
-
+int rdtime;
 int **matrice = NULL;
 int tab[3][4],NbrOneMatrice = 0,win_game = 0;
 
@@ -81,6 +81,7 @@ void gestionEvenement(EvenementGfx evenement)
 	{
 		case Initialisation:
 			active =rand()%2 +4;
+			rdtime =rand()%3;
 			/* Le message "Initialisation" est envoye une seule fois, au debut du
 			programme : il permet de fixer "image" a la valeur qu'il devra conserver
 			jusqu'a la fin du programme : soit "image" reste a NULL si l'image n'a
