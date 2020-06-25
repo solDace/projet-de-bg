@@ -10,7 +10,7 @@
  * Fonction traitant des test memoires
  *
  */
-#include "main.h"
+int mod = 999,choix=0,one_matrice = 0,win = 0;
 
 /**
  * \fn void Display_ColorButtons(int carre)
