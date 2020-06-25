@@ -269,6 +269,37 @@ gettimeofday(&time_actuel, NULL);
 					break;
 				case 22:
 
+gettimeofday(&time_actuel, NULL);
+
+            Display_TestTop();
+            Display_TestName("Test de reaction");
+
+            switch (partie) {
+                case 0:
+                Display_TestBegin();
+                break;
+                case 1:
+                if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_debut.tv_usec))/1000000 >= rdtime){
+                    partie++;
+                    gettimeofday(&time_debut, NULL);
+                }
+                break;
+                case 2:
+                
+				effaceFenetre(0,170,0);
+				Display_TestTop();
+          		Display_TestName("Test de reaction");
+                break;
+                case 3:
+                Display_TestEnd(score);
+
+                if(saving==0){
+                    SaveScore(score,name,"../Save/React.txt");
+                    saving=1;
+                }
+                break;
+            }
+            break;
 					break;
 				case 23:
 
@@ -635,6 +666,41 @@ gettimeofday(&time_actuel, NULL);
 					}
 						break;
 					case 22:
+if(partie==0){
+                    check = Check_TestBegin();
+                    if (check==1) {
+                        partie ++;
+                        gettimeofday(&time_debut, NULL);
+						rdtime = rand()%4;
+                    }
+                }
+                else if(partie==2){
+                    check = Check_TestBegin();
+                    if (check==1) {
+                        partie ++;
+                        gettimeofday(&time_niveau, NULL);
+						score=  (((( time_niveau.tv_sec - time_debut.tv_sec) * 1000000) + time_niveau.tv_usec) - (time_debut.tv_usec))/1000;
+						
+						                    }
+                }
+                else{
+                    if (Check_TestQuitter()==1) {
+                        page = 2;
+                        partie = 0;
+                        saving=0;
+                    }
+                    else if (Check_TestRejouer()==1) {
+                        partie = 1;
+                        score = 0;
+                        gettimeofday(&time_debut, NULL);
+                        saving=0;
+												rdtime = rand()%4;
+
+
+                    }
+
+                }
+                break;
 
 						break;
 					case 23:
