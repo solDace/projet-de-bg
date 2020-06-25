@@ -10,18 +10,7 @@
  * Fonction traitant des test memoires
  *
  */
-
-/**
- * \fn void Display_MsgAccueil ()
- * \brief affiche la page demandant le nom
- *
- * \param none
- * \return none
- */
- 
- 
-int mod = 999,choix=0,one_matrice = 0,win = 0;
-
+#include "main.h"
 
 /**
  * \fn void Display_ColorButtons(int carre)
@@ -170,6 +159,16 @@ int check_Pattern(int carre){
 }
 
 
+///////////////////
+
+
+/**
+ * \fn int** chasard()
+ * \brief créé et rempli aléatoirement un tableau 2D
+ *
+ * \return un tableau int 2 dimensions
+ */
+
 int** chasard(){
 
 	int **matrice = (int**)malloc(3*sizeof(int*));
@@ -199,6 +198,17 @@ int** chasard(){
 		return matrice;
 	}
 
+
+
+/**
+ * \fn int nbr_one_matrice(int **matrice)
+ * \brief compte le nombre de 1 dans la matrice
+ *
+ * \param matrice tableau 2 dimension
+ * \return le nombre de 1 dans la matrice
+ */
+
+
 int nbr_one_matrice(int **matrice){
 	one_matrice = 0;
 	for(int i = 0; i < 3;i++){
@@ -215,6 +225,13 @@ int nbr_one_matrice(int **matrice){
 	return one_matrice;
 }
 
+/**
+ * \fn void freefct2(int **matrice)
+ * \brief libère un tableau deux dimensions
+ *
+ * \param matrice tableau 2 dimension
+ * \return none
+ */
 void freefct2(int **matrice){
 
 	int i;
@@ -229,6 +246,13 @@ void freefct2(int **matrice){
 
 	}
 
+/**
+ * \fn void choixCouleurs(int choix)
+ * \brief change la couleur courante (1=noir sinon blanc)
+ *
+ * \param choix variable pour choisir la couleur
+ * \return none
+ */
 void choixCouleurs(int choix){
 
 	if(choix == 1){
@@ -243,6 +267,14 @@ void choixCouleurs(int choix){
 
 			}
 	}
+
+/**
+ * \fn void init_carre(int **matrice)
+ * \brief dessine les carre dans la couleur correspondante
+ *
+ * \param matrice tableau deux dimension
+ * \return none
+ */
 
 void init_carre(int **matrice){
 
@@ -289,6 +321,16 @@ void init_carre(int **matrice){
 
 	}
 
+  /**
+ * \fn void carre_gris(int** matrice,int tab[3][4])
+ * \brief dessine tout les carre en gris
+ *
+ * \param matrice les réponses du joueur
+ * \param tab les bonnes réponses
+ * \return none
+ */
+
+
 void carre_gris(int** matrice,int tab[3][4]){
 
 	carre_noir(matrice[0][0],tab[0][0]);
@@ -334,6 +376,16 @@ void carre_gris(int** matrice,int tab[3][4]){
 
 	}
 
+    /**
+ * \fn void carre_noir(int mat,int tab){
+ * \brief dessine tout les carre en gris
+ *
+ * \param matrice la réponse du joueur
+ * \param tab la bonne réponse
+ * \return none
+ */
+
+
 void carre_noir(int mat,int tab){
 
 				if((mat == 1 || mat == 0) && tab == 0){
@@ -353,6 +405,13 @@ void carre_noir(int mat,int tab){
 					}
 }
 
+    /**
+ * \fn void init_tab(int tab[3][4])
+ * \brief initialise un tableau 2 dimensions
+ *
+ * \param tab tableau 2 dimensions
+ * \return none
+ */
 
 void init_tab(int tab[3][4]){
 
@@ -364,6 +423,15 @@ void init_tab(int tab[3][4]){
 			}
 		}
 }
+
+    /**
+ * \fn void verification(int tab[3][4])
+ * \brief détecte le rectangle clické
+ *
+ * \param tab tableau 2 dimensions
+ * \return none
+ */
+
 
 void verification(int tab[3][4]){
 
@@ -447,6 +515,15 @@ void verification(int tab[3][4]){
 			break;
 			}
 }
+
+    /**
+ * \fn int victoire(int** matrice,int tab[3][4])
+ * \brief verfifcation de la victoire
+ *
+ * \param tab réponses justes
+ * \param matrice réponses du joueurs
+ * \return 1 s'il y a victoire
+ */
 
 
 int victoire(int** matrice,int tab[3][4]){
