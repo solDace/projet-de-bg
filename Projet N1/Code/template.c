@@ -63,7 +63,7 @@ void Display_TestName(char* name){
  * \fn void Display_TestScore(int score)
  * \brief Affichage du Score actuel
  *
- * \param score score ectuel
+ * \param score score actuel
  * \return none
  */
 
@@ -109,7 +109,7 @@ strcat(text, ScoreText);
 /**
  * \brief affichage des conseils et du "cliquer pour commencer"
  *
- * \param valeur permatant de connaitre le test
+ * \param nb valeur permatant de connaitre le test
  * \return none
  */
  
@@ -158,8 +158,8 @@ void Display_TestBegin(int nb){
 			afficheChaine("Est ce que la couleur correspond au mot ? Attention, ne tardez pas trop !",15,LargeurFenetre/8+(6*LargeurFenetre/8-taille2)/2 , 450);
 			break;
 		case 6 :
-			taille2= tailleChaine ("Cliquer sur le cercle le plus de fois possible avant la fin du temps !",15);
-			afficheChaine("Cliquer sur le cercle le plus de fois possible avant la fin du temps !",15,LargeurFenetre/8+(6*LargeurFenetre/8-taille2)/2 , 450);
+			taille2= tailleChaine ("Cliquer le plus vite possible lorsque l ecran change de couleur ",15);
+			afficheChaine("Cliquer le plus vite possible lorsque l ecran change de couleur",15,LargeurFenetre/8+(6*LargeurFenetre/8-taille2)/2 , 450);
 			break;
 		}
 }
@@ -167,7 +167,7 @@ void Display_TestBegin(int nb){
 /**
  * \brief affichage du score et des boutons rejouer et quitter
  *
- * \param le score
+ * \param score le score
  * \return none
  */
  
@@ -266,7 +266,9 @@ int Check_TestRejouer(){
 /**
  * \brief sauvegarde des scores dans un fichier texte
  *
- * \param score, nom joueur et chemin fichier
+ * \param score le score
+ * \param pName nom joueur
+ * \param files chemin fichier
  * \return 1 fonctionne correctement, exit failure si pas reussi
  */
  
@@ -289,7 +291,9 @@ int SaveScore(int score, char pName[MAX_NAME],char files[MAX_NAME]){
 /**
  * \brief permet de lire le fichier sauvegarde et d'en sortir les score
  *
- * \param tableau score, nom de l'utilisateur, chemin du fichier save
+ * \param score tableau avec les score 
+ * \param pName nom joueur
+ * \param files chemin du fichier sauvegarde 
  * \return tableau avec les score correspondant au noms en param
  */
  
@@ -326,6 +330,13 @@ int ReadScore(int score[MAX_PLAYERS], char pName[MAX_NAME],char files[MAX_NAME])
 	}
 }
 
+/**
+ * \brief affiche la page résultat
+ *
+ * \param pName nom joueur
+ * \return none
+ */
+ 
 void PageResultat(char pName[MAX_NAME]){
 
 	int D1=0,D2=0,D3=0,D4=0;
@@ -361,6 +372,13 @@ void PageResultat(char pName[MAX_NAME]){
 
 }
 
+/**
+ * \brief affiche les résultats du test 1
+ *
+ * \param pName nom joueur
+ * \return none
+ */
+ 
 void resTest1(char pName[MAX_NAME]){
 
 	
@@ -393,6 +411,13 @@ void resTest1(char pName[MAX_NAME]){
 
 }
 
+/**
+ * \brief affiche les résultats du test 2
+ *
+ * \param pName nom joueur
+ * \return none
+ */
+ 
 void resTest2(char pName[MAX_NAME]){
 
 	int D=tailleChaine("Pattern",18), Tr=0, hs1=0, hs2=0, hs3=0;
@@ -422,6 +447,13 @@ void resTest2(char pName[MAX_NAME]){
 	afficheChaine(BS3,12,107,142);
 }
 
+/**
+ * \brief affiche les résultats du test 3
+ *
+ * \param pName nom joueur
+ * \return none
+ */
+ 
 void resTest3(char pName[MAX_NAME]){
 
 	int D=tailleChaine("Fast click",18), Tr=0, hs1=0, hs2=0, hs3=0;
@@ -453,13 +485,50 @@ void resTest3(char pName[MAX_NAME]){
 
 }
 
+/**
+ * \brief affiche les résultats du test 4
+ *
+ * \param nom joueur
+ * \return none
+ */
+ 
 void resTest4(char pName[MAX_NAME]){
 
+	int D=tailleChaine("Reaction",18), Tr=0, hs1=0, hs2=0, hs3=0;
+	int score[MAX_TRY];
+	char BS1[MAX_SCORE]="",BS2[MAX_SCORE]="",BS3[MAX_SCORE]="";
+	
 	couleurCourante(170,170,170);
 	rectangle(408,100,591,275);
+	
+	couleurCourante(0,0,0);
+	afficheChaine("Reaction",18,408+(183-D)/2,250);
+	afficheChaine("1.",12,420,210);
+	afficheChaine("2.",12,420,170);
+	afficheChaine("3.",12,420,130);
+	
+	Tr=ReadScore(score,pName,"../Save/TestReact.txt");
+	hs1=MS1(score,Tr);
+	hs2=MS2(score,Tr,hs1);
+	hs3=MS3(score,Tr,hs1,hs2);
 
+	sprintf(BS1,"%d",hs1);
+	sprintf(BS2,"%d",hs2);
+	sprintf(BS3,"%d",hs3);
+
+	afficheChaine(BS1,12,440,210);
+	afficheChaine(BS2,12,440,170);
+	afficheChaine(BS3,12,440,130);
 }
 
+/**
+ * \brief affiche les résultats du test 5
+ *
+ * \param nom joueur
+ * \return none
+ */
+ 
+ 
 void resTest5(char pName[MAX_NAME]){
 	
 	int D=tailleChaine("Text Couleur",18), Tr=0, hs1=0, hs2=0, hs3=0;
@@ -489,7 +558,13 @@ void resTest5(char pName[MAX_NAME]){
 	afficheChaine(BS3,12,783,442);
 
 }
-
+/**
+ * \brief affiche les résultats du test 6
+ *
+ * \param nom joueur
+ * \return none
+ */
+ 
 void resTest6(char pName[MAX_NAME]){
 	
 	int D=tailleChaine("Q and M",18), Tr=0, hs1=0, hs2=0, hs3=0;
@@ -520,6 +595,15 @@ void resTest6(char pName[MAX_NAME]){
 
 }
 
+/**
+ * \brief calcul le meilleur score parmis les score
+ *
+ * \param score tableau avec les scores
+ * \param nb taille tableau score
+ * \return meilleur score
+ */
+ 
+ 
 int HS1(int score[MAX_TRY],int nb){
 	int hs=0;
 	for(int i=0;i<nb;i++){
@@ -530,6 +614,15 @@ int HS1(int score[MAX_TRY],int nb){
 	return hs;
 }
 
+/**
+ * \brief calcul le 2nd meilleur score parmis les score
+ *
+ * \param hs1 meilleur score 1
+ * \param nb taille tableau score
+ * \param score tableau avec les scores
+ * \return 2nd meilleur score
+ */
+ 
 int HS2(int score[MAX_TRY],int nb,int hs1){
 	int hs=0;
 	for(int i=0;i<nb;i++){
@@ -542,11 +635,74 @@ int HS2(int score[MAX_TRY],int nb,int hs1){
 	return hs;
 }
 
+/**
+ * \brief calcul le 3em meilleur score parmis les score
+ *
+ * \param score tableau avec les scores
+ * \param hs1 meilleur score 1
+ * \param hs2 meilleur score 2
+ * \param nb taille tableau score
+ * \return 3em meilleur score
+ */
+ 
 int HS3(int score[MAX_TRY],int nb,int hs1, int hs2){
 	int hs=0;
 	for(int i=0;i<nb;i++){
 		if (score[i]!=hs1 && score[i]!=hs2){
 			if(hs<score[i]){
+				hs=score[i];
+			}
+		}
+	}
+	return hs;
+}
+
+int MS1(int score[MAX_TRY],int nb){
+	int hs=9999999;
+	for(int i=0;i<nb;i++){
+		if(hs>score[i]){
+			hs=score[i];
+		}
+	}
+	return hs;
+}
+
+/**
+ * \brief calcul le 2nd meilleur score parmis les score
+ *
+ * \param hs1 meilleur score 1
+ * \param nb taille tableau score
+ * \param score tableau avec les scores
+ * \return 2nd meilleur score
+ */
+ 
+int MS2(int score[MAX_TRY],int nb,int hs1){
+	int hs=9999999;
+	for(int i=0;i<nb;i++){
+		if (score[i]!=hs1){
+			if(hs>score[i]){
+				hs=score[i];
+			}
+		}
+	}
+	return hs;
+}
+
+/**
+ * \brief calcul le 3em meilleur score parmis les score
+ *
+ * \param score tableau avec les scores
+ * \param hs1 meilleur score 1
+ * \param hs2 meilleur score 2
+ * \param nb taille tableau score
+ * \return 3em meilleur score
+ */
+ 
+int MS3(int score[MAX_TRY],int nb,int hs1, int hs2){
+	int hs=9999999;
+	for(int i=0;i<nb;i++){
+		if (score[i]!=hs1 && score[i]!=hs2){
+			if(hs>score[i]){
 				hs=score[i];
 			}
 		}

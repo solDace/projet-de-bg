@@ -104,6 +104,9 @@ int SaveScore(int score, char pName[MAX_NAME],char files[MAX_NAME]);
 int HS1(int score[MAX_TRY],int nb);
 int HS2(int score[MAX_TRY],int nb,int hs1);
 int HS3(int score[MAX_TRY],int nb,int hs1, int hs2);
+int MS1(int score[MAX_TRY],int nb);
+int MS2(int score[MAX_TRY],int nb,int hs1);
+int MS3(int score[MAX_TRY],int nb,int hs1, int hs2);
 
 void initabbleu(char tabbleu[]);
 void initabrouge(char tabrouge[]);

@@ -155,7 +155,7 @@ void menuFlex() {
 	afficheChaine("Fast Click", 24, (LargeurFenetre - taille)/2, 422);
 	//titre triangle gauche
 	couleurCourante(0, 0, 0);
-	afficheChaine("Test 2", 24, 232, 262);
+	afficheChaine("Reaction", 24, 232, 262);
 	//titre triangle droite
 	couleurCourante(0, 0, 0);
 	afficheChaine("Resultats", 24, 682, 262);

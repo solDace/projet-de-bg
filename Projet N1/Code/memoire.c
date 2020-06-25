@@ -574,3 +574,4 @@ int victoire(int** matrice,int tab[3][4]){
 		return win;
 	}
 
+ 

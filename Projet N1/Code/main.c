@@ -1,6 +1,15 @@
 #include "main.h"
 
-
+/**
+ * \file main.c
+ * \brief fonction main et gestionEvenement
+ * \author Thomas.B
+ * \version 1.0
+ * \date 20 Juin 2020
+ *
+ * Fonctions d'affichage servant de template pour les différentes pages de tests
+ *
+ */
 
 
 
@@ -65,6 +74,7 @@ int c , ce;
 
 int active;
 int rdtime;
+
 int **matrice = NULL;
 int tab[3][4],NbrOneMatrice = 0,win_game = 0;
 
@@ -269,15 +279,14 @@ gettimeofday(&time_actuel, NULL);
 					}
 					break;
 				case 22:
-
-gettimeofday(&time_actuel, NULL);
+					gettimeofday(&time_actuel, NULL);
 
             Display_TestTop();
             Display_TestName("Test de reaction");
 
             switch (partie) {
                 case 0:
-                Display_TestBegin();
+                Display_TestBegin(6);
                 break;
                 case 1:
                 if(  (long)(  ((( time_actuel.tv_sec - time_debut.tv_sec) * 1000000) + time_actuel.tv_usec) - (time_debut.tv_usec))/1000000 >= rdtime){
@@ -286,7 +295,7 @@ gettimeofday(&time_actuel, NULL);
                 }
                 break;
                 case 2:
-                
+
 				effaceFenetre(0,170,0);
 				Display_TestTop();
           		Display_TestName("Test de reaction");
@@ -295,15 +304,12 @@ gettimeofday(&time_actuel, NULL);
                 Display_TestEnd(score);
 
                 if(saving==0){
-                    SaveScore(score,name,"../Save/React.txt");
+                    SaveScore(score,name,"../Save/TestReact.txt");
                     saving=1;
                 }
                 break;
             }
             break;
-					break;
-				case 23:
-
 					break;
 				case 3:
 					menuSync();
@@ -386,9 +392,6 @@ gettimeofday(&time_actuel, NULL);
 
 
 					}
-					break;
-				case 33:
-
 					break;
 				case 4:
 					PageResultat(name);
@@ -667,7 +670,7 @@ gettimeofday(&time_actuel, NULL);
 					}
 						break;
 					case 22:
-if(partie==0){
+						if(partie==0){
                     check = Check_TestBegin();
                     if (check==1) {
                         partie ++;
@@ -681,7 +684,7 @@ if(partie==0){
                         partie ++;
                         gettimeofday(&time_niveau, NULL);
 						score=  (((( time_niveau.tv_sec - time_debut.tv_sec) * 1000000) + time_niveau.tv_usec) - (time_debut.tv_usec))/1000;
-						
+
 						                    }
                 }
                 else{
@@ -702,7 +705,6 @@ if(partie==0){
 
                 }
                 break;
-
 						break;
 					case 23:
 
